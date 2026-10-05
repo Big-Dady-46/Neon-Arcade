@@ -671,8 +671,8 @@ body.mobile-body {
 }
 
 .game-card-2col {
-  background: linear-gradient(180deg, rgba(28, 32, 50, 0.6) 0%, rgba(23, 26, 39, 0.95) 100%);
-  border: 1px solid var(--border-card);
+  background: linear-gradient(180deg, #1C2133 0%, #131726 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-lg);
   padding: 9px;
   display: flex;
@@ -681,12 +681,12 @@ body.mobile-body {
   position: relative;
   cursor: pointer;
   transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.15s ease, box-shadow 0.15s ease;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
 }
 .game-card-2col:active {
   transform: scale(0.96);
-  border-color: var(--border-highlight);
-  box-shadow: 0 0 12px rgba(0, 242, 254, 0.25);
+  border-color: #00FF88;
+  box-shadow: 0 0 14px rgba(0, 255, 136, 0.35);
 }
 
 /* Card Artwork Frame (Aspect Ratio 16:10 / 4:3) */
@@ -825,10 +825,10 @@ body.mobile-body {
   transform: scale(0.92);
 }
 .bottom-nav-item.active {
-  color: var(--neon-teal);
+  color: #00FF88;
 }
 .bottom-nav-item.active .nav-svg {
-  filter: drop-shadow(0 0 6px var(--neon-teal));
+  filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.7));
 }
 
 .nav-svg {
