@@ -1,0 +1,62 @@
+/* ==========================================================================
+   NEON ARCADE - REFINED GAMING DESIGN SYSTEM (SUBTLE & CLEAN SHADOWS)
+   ========================================================================== */
+
+:root {
+  /* Clean gaming dark palette */
+  --bg-main: #090B12;
+  --bg-card: #131725;
+  --bg-card-hover: #181E30;
+  --bg-glass: rgba(12, 15, 25, 0.94);
+  --bg-glass-card: rgba(18, 22, 36, 0.8);
+
+  /* Precise Accents */
+  --neon-cyan: #00F2FE;
+  --neon-cyan-glow: 0 0 12px rgba(0, 242, 254, 0.25);
+  --neon-purple: #8B5CF6;
+  --neon-purple-glow: 0 0 12px rgba(139, 92, 246, 0.25);
+  --neon-pink: #EC4899;
+  --neon-pink-glow: 0 0 12px rgba(236, 72, 153, 0.25);
+  --neon-gold: #FBBF24;
+  --neon-gold-glow: 0 0 10px rgba(251, 191, 36, 0.25);
+  --neon-green: #10B981;
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(135deg, #00F2FE 0%, #8B5CF6 50%, #EC4899 100%);
+  --gradient-btn: linear-gradient(135deg, #00F2FE 0%, #6366F1 100%);
+  --gradient-btn-hover: linear-gradient(135deg, #38BDF8 0%, #818CF8 100%);
+  --gradient-hero: radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 60%),
+                   radial-gradient(circle at 20% 80%, rgba(0, 242, 254, 0.1) 0%, transparent 60%);
+
+  /* Typography */
+  --font-display: 'Orbitron', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-ui: 'Rajdhani', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-tech: 'Chakra Petch', monospace;
+  --font-family: var(--font-ui);
+  --font-mono: 'JetBrains Mono', 'Chakra Petch', monospace;
+
+  --text-white: #FFFFFF;
+  --text-light: #F3F4F6;
+  --text-gray: #9CA3AF;
+  --text-muted: #6B7280;
+
+  /* Borders & Radii */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(255, 255, 255, 0.14);
+  --border-glow: rgba(0, 242, 254, 0.4);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-full: 9999px;
+
+  /* Subtle, Refined Shadows (No Excessive Blurry Glows) */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.45);
+
+  /* Transitions */
+  --anim-fast: 160ms cubic-bezier(0.4, 0, 0.2, 1);
+  --anim-smooth: 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}

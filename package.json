@@ -1,0 +1,14 @@
+{
+  "name": "neon-arcade-100",
+  "version": "1.0.0",
+  "description": "Professional 100+ Game HTML5 Arcade Platform",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.2.0"
+  }
+}
