@@ -4,6 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="theme-color" content="#0B0E17">
+
+  <!-- Instant Auto-Redirect for Mobile Devices to Mobile Snake Arcade -->
+  <script>
+    (function() {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('view') === 'desktop') return;
+        var ua = navigator.userAgent || '';
+        var isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(ua);
+        var isSmallScreen = window.innerWidth <= 768 && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+        if (isMobileUA || isSmallScreen) {
+          window.location.replace('/mobile/' + window.location.search);
+        }
+      } catch (e) {}
+    })();
+  </script>
+
   <meta name="description" content="Neon Arcade - Premium Full-HD 60 FPS HTML5 and Canvas Web Gaming Platform featuring 100+ distinct retro and hyper-casual games.">
   <title>NEON ARCADE | 100+ High-Octane Retro & Casual Games</title>
 
