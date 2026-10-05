@@ -29,26 +29,34 @@
             <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="cyberHex" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#00F2FE"/>
-                  <stop offset="50%" stop-color="#7928CA"/>
-                  <stop offset="100%" stop-color="#FF007A"/>
+                  <stop offset="0%" stop-color="#00FF88"/>
+                  <stop offset="50%" stop-color="#00F2FE"/>
+                  <stop offset="100%" stop-color="#FFD700"/>
                 </linearGradient>
               </defs>
-              <polygon points="50,6 90,28 90,72 50,94 10,72 10,28" fill="#171A27" stroke="url(#cyberHex)" stroke-width="5"/>
-              <polygon points="50,18 80,35 80,65 50,82 20,65 20,35" fill="#0F111A" stroke="rgba(0, 242, 254, 0.45)" stroke-width="2"/>
-              <path d="M36 50 H44 V42 H48 V50 H56 V54 H48 V62 H44 V54 H36 Z" fill="#00F2FE"/>
-              <circle cx="64" cy="46" r="3.5" fill="#FF007A"/>
+              <polygon points="50,6 90,28 90,72 50,94 10,72 10,28" fill="#141926" stroke="url(#cyberHex)" stroke-width="5"/>
+              <polygon points="50,18 80,35 80,65 50,82 20,65 20,35" fill="#0A0D16" stroke="rgba(0, 255, 136, 0.45)" stroke-width="2"/>
+              <path d="M36 50 H44 V42 H48 V50 H56 V54 H48 V62 H44 V54 H36 Z" fill="#00FF88"/>
+              <circle cx="64" cy="46" r="3.5" fill="#EF4444"/>
               <circle cx="72" cy="54" r="3.5" fill="#FFD700"/>
             </svg>
           </div>
           <div class="mobile-brand-text">
             <span class="brand-title">NEON<span class="brand-accent">ARCADE</span></span>
-            <span class="brand-fps-pill">PRO • 60 FPS</span>
+            <div class="brand-sub-row">
+              <span class="brand-live-indicator"></span>
+              <span class="brand-fps-pill">PRO • 60 FPS</span>
+            </div>
           </div>
         </a>
 
-        <!-- Top Right Actions: Sound & Menu Drawer -->
+        <!-- Top Right Actions: System Status & Controls -->
         <div class="mobile-header-actions">
+          <div class="header-status-dots" title="Status: Online 60fps (Green), Low Latency (Yellow), Stereo FX (Red)">
+            <span class="status-dot dot-green"></span>
+            <span class="status-dot dot-yellow"></span>
+            <span class="status-dot dot-red"></span>
+          </div>
           <button class="mobile-header-btn" id="btnSoundToggle" title="Toggle Sound (Mute/Unmute)">
             <span id="soundIcon">🔊</span>
           </button>
@@ -58,10 +66,10 @@
         </div>
       </div>
 
-      <!-- Full-Width Mobile Search Bar -->
+      <!-- Full-Width Mobile Search Bar with Green Lens -->
       <div class="mobile-search-bar">
         <span class="search-lens-icon">🔍</span>
-        <input type="text" id="mobileSearchInput" class="mobile-search-field" placeholder="Search 15 games..." autocomplete="off">
+        <input type="text" id="mobileSearchInput" class="mobile-search-field" placeholder="Search 15 arcade titles..." autocomplete="off">
         <button class="search-clear-btn hidden" id="btnClearSearch" title="Clear">✕</button>
       </div>
     </header>
@@ -78,7 +86,7 @@
       <button class="category-pill" data-cat="favorites">❤️ Favorites</button>
     </nav>
 
-    <!-- Mobile Hero (Height: 220-280px) -->
+    <!-- Mobile Hero with Cyber Grid Boxes (Height: 220-280px) -->
     <section class="mobile-hero-section">
       <div class="mobile-hero-card" id="mobileHeroCard">
         <div class="hero-top-row">
@@ -102,8 +110,10 @@
             <h1 class="hero-title" id="heroTitle">Blade Dash</h1>
             <p class="hero-desc" id="heroDesc">Fling steel daggers into spinning targets with pure adrenaline.</p>
             <div class="hero-chips-row">
-              <span class="hero-chip">⚡ 60 FPS</span>
-              <span class="hero-chip" id="heroBestChip">🏆 BEST: <strong id="heroBestVal">0</strong></span>
+              <span class="hero-chip chip-green">⚡ 60 FPS</span>
+              <span class="hero-chip chip-yellow" id="heroBestChip">🏆 BEST: <strong id="heroBestVal">0</strong></span>
+              <span class="hero-chip chip-red">🔥 HOT</span>
+              <span class="hero-chip chip-blue">🕹️ PRO</span>
             </div>
           </div>
         </div>

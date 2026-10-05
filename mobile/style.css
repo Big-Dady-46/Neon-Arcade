@@ -62,13 +62,18 @@ html, body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Atmospheric Cyber Ambient Glow Background */
+/* Atmospheric Cyber Ambient Glow with Retro Grid Boxes (Matching Desktop Banner) */
 body.mobile-body {
   background-color: var(--bg-app);
   background-image: 
-    radial-gradient(circle at 50% 0%, rgba(0, 242, 254, 0.09) 0%, transparent 60%),
-    radial-gradient(circle at 100% 35%, rgba(121, 40, 202, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 0% 75%, rgba(255, 0, 122, 0.06) 0%, transparent 50%);
+    /* Cyber grid boxes like desktop banner */
+    linear-gradient(rgba(0, 242, 254, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 242, 254, 0.04) 1px, transparent 1px),
+    /* Ambient glow meshes (emerald green on top, teal/blue in middle, crimson below) */
+    radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.12) 0%, transparent 55%),
+    radial-gradient(circle at 100% 30%, rgba(0, 242, 254, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 0% 65%, rgba(239, 68, 68, 0.06) 0%, transparent 50%);
+  background-size: 26px 26px, 26px 26px, 100% 100%, 100% 100%, 100% 100%;
   background-attachment: fixed;
 }
 
@@ -89,7 +94,7 @@ body.mobile-body {
 }
 
 /* ==========================================================================
-   MOBILE HEADER (Sticky, Compact, 10–14px padding, Subtle Backdrop Blur)
+   MOBILE HEADER (Sticky, Compact, Green Underline, Subtle Backdrop Blur)
    ========================================================================== */
 .mobile-header {
   position: sticky;
@@ -98,13 +103,13 @@ body.mobile-body {
   background: var(--bg-surface-glass);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.3);
   padding: 10px 14px 10px;
   display: flex;
   flex-direction: column;
   gap: 8px;
   width: 100%;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(16, 185, 129, 0.2);
 }
 
 .mobile-header-top {
@@ -123,10 +128,10 @@ body.mobile-body {
 }
 
 .mobile-brand-emblem {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   flex-shrink: 0;
-  filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.45));
+  filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.45));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -151,9 +156,24 @@ body.mobile-body {
 }
 
 .brand-accent {
-  color: var(--neon-teal);
-  text-shadow: 0 0 10px rgba(0, 242, 254, 0.6);
+  color: #00FF88;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.75);
   margin-left: 2px;
+}
+
+.brand-sub-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.brand-live-indicator {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #00FF88;
+  box-shadow: 0 0 6px #00FF88;
+  animation: liveBlink 1.4s infinite;
 }
 
 .brand-fps-pill {
@@ -161,15 +181,45 @@ body.mobile-body {
   font-size: 0.58rem;
   font-weight: 800;
   letter-spacing: 0.08em;
-  color: var(--neon-teal);
-  opacity: 0.88;
+  color: #00FF88;
+  opacity: 0.95;
 }
 
+/* System Status Dots Cluster (Green, Yellow, Red) */
 .mobile-header-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   flex-shrink: 0;
+}
+
+.header-status-dots {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(18, 22, 36, 0.85);
+  padding: 5px 8px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: block;
+}
+.dot-green {
+  background: #10B981;
+  box-shadow: 0 0 6px #10B981;
+}
+.dot-yellow {
+  background: #FBBF24;
+  box-shadow: 0 0 6px #FBBF24;
+}
+.dot-red {
+  background: #EF4444;
+  box-shadow: 0 0 6px #EF4444;
 }
 
 .mobile-header-btn {
@@ -188,11 +238,11 @@ body.mobile-body {
 }
 .mobile-header-btn:active {
   transform: scale(0.92);
-  border-color: var(--neon-teal);
-  box-shadow: var(--glow-teal-sm);
+  border-color: #00FF88;
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
 }
 
-/* Mobile Search Bar */
+/* Mobile Search Bar with Neon Green Focus & Icon */
 .mobile-search-bar {
   position: relative;
   width: 100%;
@@ -203,7 +253,7 @@ body.mobile-body {
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--text-muted);
+  color: #10B981;
   font-size: 0.88rem;
   pointer-events: none;
 }
@@ -214,7 +264,7 @@ body.mobile-body {
   padding: 0 34px 0 34px;
   border-radius: var(--radius-md);
   background: var(--bg-input);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid rgba(16, 185, 129, 0.25);
   color: var(--text-primary);
   font-family: var(--font-sans);
   font-size: 0.82rem;
@@ -226,8 +276,8 @@ body.mobile-body {
   color: var(--text-muted);
 }
 .mobile-search-field:focus {
-  border-color: var(--neon-teal);
-  box-shadow: 0 0 12px rgba(0, 242, 254, 0.25);
+  border-color: #00FF88;
+  box-shadow: 0 0 14px rgba(0, 255, 136, 0.35);
 }
 
 .search-clear-btn {
@@ -252,7 +302,7 @@ body.mobile-body {
 }
 
 /* ==========================================================================
-   MOBILE CATEGORY BAR (Horizontal Swipe Pills)
+   MOBILE CATEGORY BAR (Horizontal Swipe Pills with Red, Yellow, Green, Blue)
    ========================================================================== */
 .mobile-category-bar {
   display: flex;
@@ -285,15 +335,59 @@ body.mobile-body {
 .category-pill:active {
   transform: scale(0.95);
 }
-.category-pill.active {
-  background: linear-gradient(135deg, rgba(0, 242, 254, 0.18) 0%, rgba(121, 40, 202, 0.18) 100%);
-  border-color: var(--neon-teal);
+
+/* Category Pills in Tasteful Blue, Red, Green, Yellow */
+.category-pill[data-cat="all"].active {
+  background: linear-gradient(135deg, rgba(0, 242, 254, 0.25), rgba(37, 99, 235, 0.3));
+  border-color: #00F2FE;
   color: #FFFFFF;
-  box-shadow: 0 0 14px rgba(0, 242, 254, 0.35);
+  box-shadow: 0 0 14px rgba(0, 242, 254, 0.45);
+}
+.category-pill[data-cat="top"].active {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(249, 115, 22, 0.3));
+  border-color: #EF4444;
+  color: #FFFFFF;
+  box-shadow: 0 0 14px rgba(239, 68, 68, 0.45);
+}
+.category-pill[data-cat="arcade"].active {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(99, 102, 241, 0.3));
+  border-color: #3B82F6;
+  color: #FFFFFF;
+  box-shadow: 0 0 14px rgba(59, 130, 246, 0.45);
+}
+.category-pill[data-cat="puzzle"].active {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(139, 92, 246, 0.3));
+  border-color: #6366F1;
+  color: #FFFFFF;
+  box-shadow: 0 0 14px rgba(99, 102, 241, 0.45);
+}
+.category-pill[data-cat="reflex"].active {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(5, 150, 105, 0.3));
+  border-color: #10B981;
+  color: #FFFFFF;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.45);
+}
+.category-pill[data-cat="sports"].active {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(217, 119, 6, 0.3));
+  border-color: #F59E0B;
+  color: #FFFFFF;
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.45);
+}
+.category-pill[data-cat="racing"].active {
+  background: linear-gradient(135deg, rgba(255, 0, 85, 0.25), rgba(225, 29, 72, 0.3));
+  border-color: #FF0055;
+  color: #FFFFFF;
+  box-shadow: 0 0 14px rgba(255, 0, 85, 0.45);
+}
+.category-pill[data-cat="favorites"].active {
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.25), rgba(225, 29, 72, 0.3));
+  border-color: #F43F5E;
+  color: #FFFFFF;
+  box-shadow: 0 0 14px rgba(244, 63, 94, 0.45);
 }
 
 /* ==========================================================================
-   MOBILE HERO (Height: 220–280px, Surface #171A27, Rounded 18px)
+   MOBILE HERO (Height: 220–280px, Retro Grid Boxes & Cyber Green Highlight)
    ========================================================================== */
 .mobile-hero-section {
   padding: 8px 14px 14px;
@@ -301,17 +395,23 @@ body.mobile-body {
 }
 
 .mobile-hero-card {
-  height: 235px;
+  height: 236px;
   border-radius: var(--radius-xl);
-  background: linear-gradient(145deg, #1C1F32 0%, #171A27 100%);
-  border: 1px solid var(--border-card);
+  /* Cyber grid boxes like desktop banner */
+  background-color: #141726;
+  background-image: 
+    linear-gradient(rgba(0, 242, 254, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 242, 254, 0.08) 1px, transparent 1px),
+    linear-gradient(145deg, #1A1F32 0%, #121524 100%);
+  background-size: 22px 22px, 22px 22px, 100% 100%;
+  border: 1px solid rgba(16, 185, 129, 0.4);
   padding: 14px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 242, 254, 0.08);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.15);
 }
 
 .mobile-hero-card::before {
@@ -321,7 +421,7 @@ body.mobile-body {
   top: -25px;
   width: 140px;
   height: 140px;
-  background: radial-gradient(circle, rgba(0, 242, 254, 0.18) 0%, rgba(0, 242, 254, 0) 70%);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.22) 0%, rgba(0, 242, 254, 0) 70%);
   pointer-events: none;
 }
 
@@ -350,53 +450,73 @@ body.mobile-body {
 .hero-dot.active {
   width: 18px;
   border-radius: 10px;
-  background: var(--neon-teal);
-  box-shadow: 0 0 8px var(--neon-teal);
+  background: #00FF88;
+  box-shadow: 0 0 10px #00FF88;
 }
 
 .hero-chips-row {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   margin-top: 4px;
+  flex-wrap: nowrap;
 }
 
 .hero-chip {
-  font-size: 0.62rem;
-  font-weight: 700;
+  font-size: 0.6rem;
+  font-weight: 800;
   padding: 2px 7px;
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-secondary);
+  white-space: nowrap;
 }
-.hero-chip strong {
-  color: var(--neon-gold);
+.hero-chip.chip-green {
+  background: rgba(16, 185, 129, 0.14);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #00FF88;
+}
+.hero-chip.chip-yellow {
+  background: rgba(251, 191, 36, 0.14);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  color: #FBBF24;
+}
+.hero-chip.chip-yellow strong {
+  color: #FBBF24;
+}
+.hero-chip.chip-red {
+  background: rgba(239, 68, 68, 0.14);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #FF5577;
+}
+.hero-chip.chip-blue {
+  background: rgba(0, 242, 254, 0.14);
+  border: 1px solid rgba(0, 242, 254, 0.4);
+  color: #00F2FE;
 }
 
 .hero-tag-badge {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  background: rgba(0, 242, 254, 0.12);
-  border: 1px solid rgba(0, 242, 254, 0.35);
-  padding: 3px 8px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.45);
+  padding: 3px 9px;
   border-radius: var(--radius-full);
   font-family: var(--font-heading);
   font-size: 0.62rem;
   font-weight: 800;
   letter-spacing: 0.06em;
-  color: var(--neon-teal);
+  color: #00FF88;
   align-self: flex-start;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
 }
 
 .hero-live-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--neon-teal);
-  box-shadow: 0 0 6px var(--neon-teal);
-  animation: liveBlink 1.5s infinite;
+  background: #00FF88;
+  box-shadow: 0 0 8px #00FF88;
+  animation: liveBlink 1.2s infinite;
 }
 @keyframes liveBlink {
   0%, 100% { opacity: 1; }
@@ -441,7 +561,7 @@ body.mobile-body {
   font-size: 0.64rem;
   font-weight: 700;
   letter-spacing: 0.05em;
-  color: var(--neon-gold);
+  color: #FBBF24;
   display: block;
   margin-bottom: 2px;
 }
@@ -473,8 +593,8 @@ body.mobile-body {
   height: 40px;
   border-radius: var(--radius-md);
   border: none;
-  background: linear-gradient(135deg, #00F2FE 0%, #0284C7 60%, #7928CA 100%);
-  color: #0F111A;
+  background: linear-gradient(135deg, #00FF88 0%, #00F2FE 50%, #2563EB 100%);
+  color: #0A0D16;
   font-family: var(--font-heading);
   font-size: 0.84rem;
   font-weight: 900;
@@ -484,12 +604,12 @@ body.mobile-body {
   justify-content: center;
   gap: 6px;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0, 242, 254, 0.35);
+  box-shadow: 0 4px 18px rgba(0, 255, 136, 0.4);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .hero-play-btn:active {
   transform: scale(0.97);
-  box-shadow: 0 2px 8px rgba(0, 242, 254, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 255, 136, 0.25);
 }
 
 /* ==========================================================================
