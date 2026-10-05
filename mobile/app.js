@@ -651,6 +651,9 @@ class MobileApp {
 
       const favBtn = card.querySelector('.card-fav-btn');
       if (favBtn) {
+        favBtn.addEventListener('pointerdown', (e) => {
+          e.stopPropagation();
+        });
         favBtn.addEventListener('click', (e) => {
           e.stopPropagation();
           mobileAudio.pop();

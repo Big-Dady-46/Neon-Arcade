@@ -1465,6 +1465,170 @@ body.in-game .mobile-bottom-nav,
   font-size: 0.78rem;
 }
 
+/* ==========================================================================
+   TARGET DEVICE RESPONSIVE BREAKPOINTS (320px, 360px, 375px, 390px, 412px, 430px)
+   ========================================================================== */
+
+/* Ultra-Compact Phones (320px – 359px, e.g. iPhone SE 1st gen) */
+@media (max-width: 359px) {
+  .mobile-header {
+    padding: max(8px, env(safe-area-inset-top, 8px)) 10px 8px;
+    gap: 6px;
+  }
+  .brand-title {
+    font-size: 0.92rem;
+  }
+  .mobile-brand-emblem {
+    width: 30px;
+    height: 30px;
+  }
+  .mobile-search-field {
+    height: 35px;
+    font-size: 0.74rem;
+    padding: 0 30px;
+  }
+  .mobile-category-bar {
+    padding: 6px 10px 4px;
+    gap: 5px;
+  }
+  .category-pill {
+    padding: 5px 10px;
+    font-size: 0.7rem;
+  }
+  .mobile-hero-section {
+    padding: 6px 10px 10px;
+  }
+  .mobile-hero-card {
+    height: 220px;
+    padding: 10px;
+  }
+  .hero-artwork-frame {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+  }
+  .hero-title {
+    font-size: 1.05rem;
+  }
+  .hero-desc {
+    font-size: 0.68rem;
+    -webkit-line-clamp: 2;
+  }
+  .hero-play-btn {
+    height: 36px;
+    font-size: 0.78rem;
+  }
+  .mobile-content-container {
+    padding: 0 10px 14px;
+  }
+  .mobile-game-grid {
+    gap: 8px;
+  }
+  .game-card-2col {
+    padding: 7px;
+    gap: 6px;
+  }
+  .card-name {
+    font-size: 0.75rem;
+  }
+  .card-cat-label, .card-score-label {
+    font-size: 0.58rem;
+  }
+  .card-fav-btn {
+    width: 22px;
+    height: 22px;
+    font-size: 0.65rem;
+  }
+  .touch-dpad-layout {
+    grid-template-columns: repeat(3, 44px);
+    grid-template-rows: repeat(2, 40px);
+  }
+  .touch-action-btn {
+    height: 46px;
+    font-size: 0.78rem;
+  }
+}
+
+/* Small / Compact Phones (360px – 374px, e.g. Galaxy S8 / A10 / S9) */
+@media (min-width: 360px) and (max-width: 374px) {
+  .mobile-header {
+    padding: max(9px, env(safe-area-inset-top, 9px)) 12px 8px;
+  }
+  .mobile-hero-section {
+    padding: 6px 12px 12px;
+  }
+  .mobile-hero-card {
+    height: 228px;
+    padding: 12px;
+  }
+  .mobile-content-container {
+    padding: 0 12px 14px;
+  }
+  .mobile-game-grid {
+    gap: 10px;
+  }
+  .game-card-2col {
+    padding: 8px;
+  }
+  .card-name {
+    font-size: 0.8rem;
+  }
+}
+
+/* Standard Mobile Devices (375px – 411px, e.g. iPhone X / 11 / 12 / 13 / 14 / 15) */
+@media (min-width: 375px) and (max-width: 411px) {
+  .mobile-header {
+    padding: max(10px, env(safe-area-inset-top, 10px)) 14px 10px;
+  }
+  .mobile-hero-section {
+    padding: 8px 14px 14px;
+  }
+  .mobile-hero-card {
+    height: 236px;
+    padding: 14px;
+  }
+  .mobile-content-container {
+    padding: 0 14px 16px;
+  }
+  .mobile-game-grid {
+    gap: 11px;
+  }
+}
+
+/* Large Flagship Phones (412px – 430px+, e.g. Pixel 8, Galaxy S23 Ultra, iPhone 15 Pro Max) */
+@media (min-width: 412px) {
+  .mobile-header {
+    padding: max(12px, env(safe-area-inset-top, 12px)) 16px 10px;
+  }
+  .mobile-hero-section {
+    padding: 10px 16px 16px;
+  }
+  .mobile-hero-card {
+    height: 246px;
+    padding: 16px;
+  }
+  .hero-artwork-frame {
+    width: 76px;
+    height: 76px;
+    min-width: 76px;
+  }
+  .hero-title {
+    font-size: 1.35rem;
+  }
+  .mobile-content-container {
+    padding: 0 16px 18px;
+  }
+  .mobile-game-grid {
+    gap: 12px;
+  }
+  .game-card-2col {
+    padding: 10px;
+  }
+  .card-name {
+    font-size: 0.88rem;
+  }
+}
+
 /* Tablet & Desktop Overrides (Desktop Protection) */
 @media (min-width: 481px) {
   .mobile-app-wrapper {
