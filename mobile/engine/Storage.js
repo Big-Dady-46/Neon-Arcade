@@ -1,9 +1,9 @@
 /**
- * MobileStorage - Persistent LocalStorage manager for White Mobile Arcade.
+ * MobileStorage - Persistent LocalStorage manager for Neon Arcade Mobile.
  */
 class MobileStorage {
   constructor() {
-    this.prefix = 'arcademobile_';
+    this.prefix = 'neonarcade_';
   }
 
   getHighScore(gameId) {
@@ -62,7 +62,47 @@ class MobileStorage {
     try {
       const total = this.getTotalPlayed() + 1;
       localStorage.setItem(`${this.prefix}total_played`, total.toString());
+      this.recordRecentGame(gameId);
     } catch {}
+  }
+
+  getRecentGames() {
+    try {
+      return JSON.parse(localStorage.getItem(`${this.prefix}recent_games`) || '[]');
+    } catch {
+      return [];
+    }
+  }
+
+  recordRecentGame(gameId) {
+    try {
+      let recent = this.getRecentGames().filter(id => id !== gameId);
+      recent.unshift(gameId);
+      if (recent.length > 6) recent = recent.slice(0, 6);
+      localStorage.setItem(`${this.prefix}recent_games`, JSON.stringify(recent));
+    } catch {}
+  }
+
+  getHighScoresCount(allGameIds) {
+    if (!allGameIds || !Array.isArray(allGameIds)) return 0;
+    let count = 0;
+    for (const id of allGameIds) {
+      if (this.getHighScore(id) > 0) count++;
+    }
+    return count;
+  }
+
+  getUserXP(allGameIds) {
+    const plays = this.getTotalPlayed();
+    const hsCount = this.getHighScoresCount(allGameIds);
+    // 50 XP per play + 100 XP per high score achieved
+    return (plays * 50) + (hsCount * 100);
+  }
+
+  getUserLevel(allGameIds) {
+    const xp = this.getUserXP(allGameIds);
+    const level = Math.floor(xp / 500) + 1;
+    return Math.min(level, 99);
   }
 }
 

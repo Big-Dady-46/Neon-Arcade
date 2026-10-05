@@ -229,9 +229,21 @@ class MobileApp {
     this.isPaused = false;
     this.lastLoopTime = performance.now();
 
+    // Featured games for the Hero Carousel
+    this.featuredGames = [
+      MOBILE_GAMES[0],  // Blade Dash
+      MOBILE_GAMES[7],  // Nitro Chase
+      MOBILE_GAMES[14]  // Star Strike
+    ];
+    this.heroIdx = 0;
+    this.heroTimer = null;
+
+    this.allGameIds = MOBILE_GAMES.map(g => g.id);
+
     this.initDOM();
     this.bindEvents();
-    this.renderHero();
+    this.renderHero(0);
+    this.startHeroCarousel();
     this.renderGameList();
   }
 
@@ -252,18 +264,41 @@ class MobileApp {
     this.gamesCountBadge = document.getElementById('gamesCountBadge');
   }
 
-  renderHero() {
-    const feat = MOBILE_GAMES[0]; // Blade Dash
+  renderHero(idx = 0) {
+    this.heroIdx = idx % this.featuredGames.length;
+    const feat = this.featuredGames[this.heroIdx];
+    if (!feat) return;
+
     const artFrame = document.getElementById('heroArtworkFrame');
     if (artFrame && GAME_ARTWORK[feat.id]) {
       artFrame.innerHTML = GAME_ARTWORK[feat.id];
+      artFrame.style.background = `radial-gradient(circle at 50% 50%, ${feat.color}35 0%, #121522 75%)`;
     }
+
     const titleEl = document.getElementById('heroTitle');
     const descEl = document.getElementById('heroDesc');
     const tagEl = document.getElementById('heroCategoryTag');
+    const badgeTextEl = document.getElementById('heroBadgeText');
+    const bestValEl = document.getElementById('heroBestVal');
+
     if (titleEl) titleEl.textContent = feat.title;
     if (descEl) descEl.textContent = feat.desc;
-    if (tagEl) tagEl.textContent = feat.categoryName.toUpperCase();
+    if (tagEl) {
+      tagEl.textContent = feat.categoryName.toUpperCase();
+      tagEl.style.color = feat.color;
+    }
+    if (badgeTextEl) {
+      badgeTextEl.textContent = this.heroIdx === 0 ? 'FEATURED OF THE DAY' : (this.heroIdx === 1 ? 'TOP SPEED RUN' : 'CYBER CLASSIC');
+    }
+    if (bestValEl) {
+      bestValEl.textContent = mobileStorage.getHighScore(feat.id);
+    }
+
+    // Update dots
+    const dots = document.querySelectorAll('.hero-dot');
+    dots.forEach((dot, dIdx) => {
+      dot.classList.toggle('active', dIdx === this.heroIdx);
+    });
 
     const heroBtn = document.getElementById('btnHeroPlay');
     if (heroBtn) {
@@ -274,7 +309,29 @@ class MobileApp {
     }
   }
 
+  startHeroCarousel() {
+    if (this.heroTimer) clearInterval(this.heroTimer);
+    this.heroTimer = setInterval(() => {
+      // Rotate hero if not playing a game
+      if (!this.activeGameInstance) {
+        this.heroIdx = (this.heroIdx + 1) % this.featuredGames.length;
+        this.renderHero(this.heroIdx);
+      }
+    }, 6000);
+  }
+
   bindEvents() {
+    // Hero dots click
+    const dots = document.querySelectorAll('.hero-dot');
+    dots.forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        const idx = parseInt(e.target.dataset.idx || '0', 10);
+        mobileAudio.tap();
+        this.renderHero(idx);
+        this.startHeroCarousel();
+      });
+    });
+
     // Sound Toggle Header Button
     const btnSound = document.getElementById('btnSoundToggle');
     const soundIcon = document.getElementById('soundIcon');
@@ -286,20 +343,18 @@ class MobileApp {
       });
     }
 
-    // Mobile Menu Drawer
+    // Mobile Menu / Gamer Profile Drawer
     const btnMenu = document.getElementById('btnMobileMenu');
     const drawerOverlay = document.getElementById('drawerOverlay');
     const btnCloseDrawer = document.getElementById('btnCloseDrawer');
-    if (btnMenu && drawerOverlay) {
+
+    if (btnMenu) {
       btnMenu.addEventListener('click', () => {
         mobileAudio.tap();
-        drawerOverlay.classList.remove('hidden');
-        const playsEl = document.getElementById('drawerTotalPlayed');
-        const favsEl = document.getElementById('drawerFavoritesCount');
-        if (playsEl) playsEl.textContent = mobileStorage.getTotalPlayed();
-        if (favsEl) favsEl.textContent = mobileStorage.getFavorites().length;
+        this.openDrawer();
       });
     }
+
     if (btnCloseDrawer && drawerOverlay) {
       btnCloseDrawer.addEventListener('click', () => {
         mobileAudio.tap();
@@ -363,12 +418,13 @@ class MobileApp {
 
         if (nav === 'home') {
           this.selectCategory('all');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         } else if (nav === 'categories') {
           document.getElementById('mobileCategoryBar')?.scrollIntoView({ behavior: 'smooth' });
         } else if (nav === 'favorites') {
           this.selectCategory('favorites');
         } else if (nav === 'recent' || nav === 'profile') {
-          btnMenu?.click();
+          this.openDrawer();
         }
       });
     });
@@ -420,6 +476,74 @@ class MobileApp {
         this.resizePlayerCanvas();
       }
     });
+  }
+
+  openDrawer() {
+    const drawerOverlay = document.getElementById('drawerOverlay');
+    if (!drawerOverlay) return;
+
+    const totalPlays = mobileStorage.getTotalPlayed();
+    const favCount = mobileStorage.getFavorites().length;
+    const recordsCount = mobileStorage.getHighScoresCount(this.allGameIds);
+    const userLvl = mobileStorage.getUserLevel(this.allGameIds);
+    const userXp = mobileStorage.getUserXP(this.allGameIds);
+    const xpInLevel = userXp % 500;
+    const xpPercent = Math.min(100, Math.max(5, Math.floor((xpInLevel / 500) * 100)));
+
+    const rankTitles = ['CYBER RECRUIT', 'ARCADE OPERATOR', 'GRID RUNNER', 'HIGH-SCORE MASTER', 'NEON LEGEND'];
+    const titleIdx = Math.min(rankTitles.length - 1, Math.floor((userLvl - 1) / 2));
+    const rankTitle = rankTitles[titleIdx];
+
+    const lvlPill = document.getElementById('drawerLvlPill');
+    if (lvlPill) lvlPill.textContent = `LVL ${userLvl} • ${rankTitle}`;
+
+    const xpText = document.getElementById('drawerXpText');
+    if (xpText) xpText.textContent = `${xpInLevel} / 500 XP`;
+
+    const xpFill = document.getElementById('drawerXpFill');
+    if (xpFill) xpFill.style.width = `${xpPercent}%`;
+
+    const playsEl = document.getElementById('drawerTotalPlayed');
+    const favsEl = document.getElementById('drawerFavoritesCount');
+    const recEl = document.getElementById('drawerHighScoresCount');
+    if (playsEl) playsEl.textContent = totalPlays.toString();
+    if (favsEl) favsEl.textContent = favCount.toString();
+    if (recEl) recEl.textContent = recordsCount.toString();
+
+    // Render Recent Games list
+    const recentListEl = document.getElementById('drawerRecentList');
+    if (recentListEl) {
+      const recentIds = mobileStorage.getRecentGames();
+      if (recentIds.length === 0) {
+        recentListEl.innerHTML = `<span style="font-size:0.75rem; color:var(--text-muted);">No recent games yet. Play any title to record your history!</span>`;
+      } else {
+        recentListEl.innerHTML = '';
+        recentIds.forEach(id => {
+          const game = MOBILE_GAMES.find(g => g.id === id);
+          if (!game) return;
+          const score = mobileStorage.getHighScore(game.id);
+          const item = document.createElement('div');
+          item.className = 'drawer-recent-item';
+          item.innerHTML = `
+            <div class="recent-item-thumb" style="background: radial-gradient(circle, ${game.color}35 0%, #121522 80%);">
+              ${game.icon}
+            </div>
+            <div class="recent-item-meta">
+              <span class="recent-item-name">${game.title}</span>
+              <span class="recent-item-score">BEST: ${score}</span>
+            </div>
+            <button class="recent-item-play">▶</button>
+          `;
+          item.addEventListener('click', () => {
+            drawerOverlay.classList.add('hidden');
+            this.launchGame(game);
+          });
+          recentListEl.appendChild(item);
+        });
+      }
+    }
+
+    drawerOverlay.classList.remove('hidden');
   }
 
   selectCategory(catKey) {
@@ -503,7 +627,7 @@ class MobileApp {
       const card = document.createElement('div');
       card.className = 'game-card-2col';
       card.innerHTML = `
-        <div class="card-thumb-frame">
+        <div class="card-thumb-frame" style="background: radial-gradient(circle at 50% 50%, ${game.color}28 0%, #121522 75%);">
           <span class="card-badge-pill" style="background: ${game.color};">${game.badge}</span>
           ${svgArt}
           <button class="card-fav-btn ${isFav ? 'is-fav' : ''}" data-id="${game.id}" title="Favorite">
@@ -753,36 +877,60 @@ class MobileApp {
     if (this.pauseDialog) {
       this.pauseDialog.classList.toggle('hidden', !this.isPaused);
     }
-    if (!this.isPaused) {
-      this.lastLoopTime = performance.now();
-    }
-  }
 
-  showGameOver(score, isNewBest) {
-    this.dialogFinalScore.textContent = score.toString();
-    this.dialogBestScore.textContent = mobileStorage.getHighScore(this.currentGame.id).toString();
-
-    const banner = document.getElementById('newBestBanner');
-    if (banner) {
-      banner.classList.toggle('hidden', !isNewBest);
-    }
-
-    if (isNewBest) {
-      mobileAudio.celebrate();
-      if (navigator.vibrate) navigator.vibrate([40, 60, 40, 80]);
+    if (this.isPaused) {
+      if (this.activeGameLoop) {
+        cancelAnimationFrame(this.activeGameLoop);
+        this.activeGameLoop = null;
+      }
     } else {
-      if (navigator.vibrate) navigator.vibrate(30);
-    }
+      this.lastLoopTime = performance.now();
+      const tick = (now) => {
+        const dt = Math.min(0.1, (now - this.lastLoopTime) / 1000);
+        this.lastLoopTime = now;
 
-    this.gameOverDialog.classList.remove('hidden');
+        if (!this.isPaused) {
+          if (this.activeGameInstance && typeof this.activeGameInstance.update === 'function') {
+            this.activeGameInstance.update(dt);
+          }
+          if (this.activeGameInstance && typeof this.activeGameInstance.render === 'function') {
+            this.activeGameInstance.render();
+          }
+        }
+
+        this.activeGameLoop = requestAnimationFrame(tick);
+      };
+      this.activeGameLoop = requestAnimationFrame(tick);
+    }
   }
 
   restartActiveGame() {
-    this.gameOverDialog.classList.add('hidden');
-    if (this.pauseDialog) this.pauseDialog.classList.add('hidden');
-    if (this.currentGame) {
-      this.launchGame(this.currentGame);
+    if (!this.currentGame) return;
+    const game = this.currentGame;
+    this.launchGame(game);
+  }
+
+  showGameOver(finalScore, isNewBest) {
+    if (this.activeGameLoop) {
+      cancelAnimationFrame(this.activeGameLoop);
+      this.activeGameLoop = null;
     }
+
+    if (isNewBest) {
+      mobileAudio.success();
+      if (navigator.vibrate) navigator.vibrate([60, 100, 60, 100]);
+    } else {
+      mobileAudio.gameOver();
+      if (navigator.vibrate) navigator.vibrate(80);
+    }
+
+    if (this.dialogFinalScore) this.dialogFinalScore.textContent = finalScore.toString();
+    if (this.dialogBestScore) this.dialogBestScore.textContent = this.currentHighScore.toString();
+
+    const banner = document.getElementById('newBestBanner');
+    if (banner) banner.classList.toggle('hidden', !isNewBest);
+
+    if (this.gameOverDialog) this.gameOverDialog.classList.remove('hidden');
   }
 
   exitActiveGame() {
@@ -790,21 +938,23 @@ class MobileApp {
       cancelAnimationFrame(this.activeGameLoop);
       this.activeGameLoop = null;
     }
-    if (this.activeGameInstance) {
-      if (typeof this.activeGameInstance.destroy === 'function') {
-        this.activeGameInstance.destroy();
-      }
+    if (this.activeGameInstance && typeof this.activeGameInstance.destroy === 'function') {
+      this.activeGameInstance.destroy();
       this.activeGameInstance = null;
     }
 
+    this.currentGame = null;
     document.body.classList.remove('in-game');
     document.body.style.overflow = '';
     this.playerModal.classList.remove('active');
+
+    // Refresh game list to update high scores
     this.renderGameList();
+    this.renderHero(this.heroIdx);
   }
 }
 
-// Auto-boot on load
+// Instantiate on DOM load
 window.addEventListener('DOMContentLoaded', () => {
   new MobileApp();
 });

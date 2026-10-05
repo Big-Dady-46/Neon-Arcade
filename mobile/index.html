@@ -26,7 +26,7 @@
         <!-- NEON ARCADE Brand Logo -->
         <a href="#/" class="mobile-brand-link" id="brandLink">
           <div class="mobile-brand-emblem">
-            <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="cyberHex" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#00F2FE"/>
@@ -35,7 +35,7 @@
                 </linearGradient>
               </defs>
               <polygon points="50,6 90,28 90,72 50,94 10,72 10,28" fill="#171A27" stroke="url(#cyberHex)" stroke-width="5"/>
-              <polygon points="50,18 80,35 80,65 50,82 20,65 20,35" fill="#0F111A" stroke="rgba(0, 242, 254, 0.4)" stroke-width="2"/>
+              <polygon points="50,18 80,35 80,65 50,82 20,65 20,35" fill="#0F111A" stroke="rgba(0, 242, 254, 0.45)" stroke-width="2"/>
               <path d="M36 50 H44 V42 H48 V50 H56 V54 H48 V62 H44 V54 H36 Z" fill="#00F2FE"/>
               <circle cx="64" cy="46" r="3.5" fill="#FF007A"/>
               <circle cx="72" cy="54" r="3.5" fill="#FFD700"/>
@@ -43,16 +43,16 @@
           </div>
           <div class="mobile-brand-text">
             <span class="brand-title">NEON<span class="brand-accent">ARCADE</span></span>
-            <span class="brand-fps-pill">60 FPS • PRO</span>
+            <span class="brand-fps-pill">PRO • 60 FPS</span>
           </div>
         </a>
 
-        <!-- Top Right Actions: Sound & Menu -->
+        <!-- Top Right Actions: Sound & Menu Drawer -->
         <div class="mobile-header-actions">
           <button class="mobile-header-btn" id="btnSoundToggle" title="Toggle Sound (Mute/Unmute)">
             <span id="soundIcon">🔊</span>
           </button>
-          <button class="mobile-header-btn" id="btnMobileMenu" title="Menu / Info">
+          <button class="mobile-header-btn" id="btnMobileMenu" title="Gamer Profile & Menu">
             <span>☰</span>
           </button>
         </div>
@@ -61,7 +61,7 @@
       <!-- Full-Width Mobile Search Bar -->
       <div class="mobile-search-bar">
         <span class="search-lens-icon">🔍</span>
-        <input type="text" id="mobileSearchInput" class="mobile-search-field" placeholder="Search games..." autocomplete="off">
+        <input type="text" id="mobileSearchInput" class="mobile-search-field" placeholder="Search 15 games..." autocomplete="off">
         <button class="search-clear-btn hidden" id="btnClearSearch" title="Clear">✕</button>
       </div>
     </header>
@@ -81,10 +81,18 @@
     <!-- Mobile Hero (Height: 220-280px) -->
     <section class="mobile-hero-section">
       <div class="mobile-hero-card" id="mobileHeroCard">
-        <div class="hero-tag-badge">
-          <span class="hero-live-dot"></span>
-          <span>FEATURED OF THE DAY</span>
+        <div class="hero-top-row">
+          <div class="hero-tag-badge">
+            <span class="hero-live-dot"></span>
+            <span id="heroBadgeText">FEATURED OF THE DAY</span>
+          </div>
+          <div class="hero-dots" id="heroDots">
+            <span class="hero-dot active" data-idx="0"></span>
+            <span class="hero-dot" data-idx="1"></span>
+            <span class="hero-dot" data-idx="2"></span>
+          </div>
         </div>
+
         <div class="hero-body-content">
           <div class="hero-artwork-frame" id="heroArtworkFrame">
             <!-- Rendered with high-res SVG art -->
@@ -93,10 +101,15 @@
             <span class="hero-category-tag" id="heroCategoryTag">ACTION & TIMING</span>
             <h1 class="hero-title" id="heroTitle">Blade Dash</h1>
             <p class="hero-desc" id="heroDesc">Fling steel daggers into spinning targets with pure adrenaline.</p>
+            <div class="hero-chips-row">
+              <span class="hero-chip">⚡ 60 FPS</span>
+              <span class="hero-chip" id="heroBestChip">🏆 BEST: <strong id="heroBestVal">0</strong></span>
+            </div>
           </div>
         </div>
+
         <button class="hero-play-btn" id="btnHeroPlay">
-          <span>PLAY NOW</span> ▶
+          <span>PLAY NOW</span> <span class="play-arrow">▶</span>
         </button>
       </div>
     </section>
@@ -142,13 +155,37 @@
       </div>
     </nav>
 
-    <!-- Mobile Slide-out Menu Drawer -->
+    <!-- Mobile Slide-out Menu / Gamer Profile Drawer -->
     <div class="mobile-drawer-overlay hidden" id="drawerOverlay">
       <div class="mobile-drawer-panel">
         <div class="drawer-header">
-          <span class="drawer-brand">NEON ARCADE</span>
-          <button class="drawer-close-btn" id="btnCloseDrawer">✕</button>
+          <div class="drawer-profile-info">
+            <div class="drawer-avatar">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00F2FE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <div>
+              <span class="drawer-brand">ARCADE PILOT</span>
+              <span class="drawer-lvl-pill" id="drawerLvlPill">LVL 1 • CYBER RECRUIT</span>
+            </div>
+          </div>
+          <button class="drawer-close-btn" id="btnCloseDrawer" aria-label="Close Drawer">✕</button>
         </div>
+
+        <!-- Gamer Pass XP Bar -->
+        <div class="drawer-xp-card">
+          <div class="drawer-xp-row">
+            <span>XP PROGRESS</span>
+            <span id="drawerXpText">0 / 500 XP</span>
+          </div>
+          <div class="drawer-xp-bar">
+            <div class="drawer-xp-fill" id="drawerXpFill" style="width: 5%;"></div>
+          </div>
+        </div>
+
+        <!-- Gamer Stats Grid -->
         <div class="drawer-stats">
           <div class="drawer-stat-item">
             <span class="stat-number" id="drawerTotalPlayed">0</span>
@@ -158,10 +195,28 @@
             <span class="stat-number" id="drawerFavoritesCount">0</span>
             <span class="stat-label">Favorites</span>
           </div>
+          <div class="drawer-stat-item">
+            <span class="stat-number" id="drawerHighScoresCount">0</span>
+            <span class="stat-label">Records</span>
+          </div>
         </div>
+
+        <!-- Recently Played Section -->
+        <div class="drawer-recent-wrap">
+          <span class="drawer-subhead">RECENTLY PLAYED</span>
+          <div class="drawer-recent-list" id="drawerRecentList">
+            <!-- Injected dynamically -->
+          </div>
+        </div>
+
+        <!-- Drawer Quick Actions -->
         <div class="drawer-links">
-          <button class="drawer-link-btn" id="btnDrawerRandom">🎲 Play Random Game</button>
-          <button class="drawer-link-btn" id="btnDrawerDesktop">💻 View Desktop Version</button>
+          <button class="drawer-link-btn" id="btnDrawerRandom">
+            <span>🎲</span> Play Random Game
+          </button>
+          <button class="drawer-link-btn" id="btnDrawerDesktop">
+            <span>💻</span> View Desktop Version
+          </button>
         </div>
       </div>
     </div>
@@ -185,7 +240,7 @@
 
         <div class="modal-hud-right">
           <button class="btn-hud-round" id="btnPauseGame" title="Pause Game">⏸️</button>
-          <button class="btn-hud-round" id="btnMuteAudio" title="Mute">🔊</button>
+          <button class="btn-hud-round" id="btnMuteAudio" title="Mute Audio">🔊</button>
         </div>
       </div>
 
@@ -206,11 +261,11 @@
         <div class="pause-menu-card">
           <div class="pause-tag-glow">⏸️</div>
           <h2 class="pause-heading">PAUSED</h2>
-          <p class="pause-subtext">Game state paused. Take your time!</p>
+          <p class="pause-subtext">Game state paused. Take a breath!</p>
           <div class="pause-menu-buttons">
-            <button class="btn-pause-primary" id="btnResumeGame">▶ RESUME</button>
+            <button class="btn-pause-primary" id="btnResumeGame">▶ RESUME GAME</button>
             <button class="btn-pause-secondary" id="btnRestartFromPause">🔄 RESTART</button>
-            <button class="btn-pause-secondary" id="btnExitFromPause">◀ EXIT GAME</button>
+            <button class="btn-pause-secondary" id="btnExitFromPause">◀ EXIT TO ARCADE</button>
           </div>
         </div>
       </div>
@@ -218,15 +273,15 @@
       <!-- Mobile Game Over Screen -->
       <div class="modal-gameover-overlay hidden" id="gameOverDialog">
         <div class="gameover-card">
-          <div class="new-record-banner hidden" id="newBestBanner">🎉 NEW HIGH SCORE!</div>
+          <div class="new-record-banner hidden" id="newBestBanner">🏆 NEW HIGH SCORE!</div>
           <h2 class="gameover-heading">GAME OVER</h2>
           <div class="gameover-score-grid">
             <div class="score-box">
-              <span class="score-label">SCORE</span>
+              <span class="score-label">FINAL SCORE</span>
               <span class="score-value" id="dialogFinalScore">0</span>
             </div>
             <div class="score-box highlight">
-              <span class="score-label">BEST</span>
+              <span class="score-label">ALL-TIME BEST</span>
               <span class="score-value" id="dialogBestScore">0</span>
             </div>
           </div>
