@@ -3,296 +3,236 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#FFFFFF">
+  <meta name="theme-color" content="#0F111A">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="description" content="Snake Arcade - 15+ Unique Handcrafted Mobile Games with rich vector artwork, interactive feeding snake, and 60 FPS gameplay.">
-  <title>Snake Arcade • 15+ Handcrafted 60FPS Games</title>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="NEON ARCADE - Premium Mobile Web Arcade with 15+ 60 FPS Cyberpunk Games">
+  <title>NEON ARCADE | Mobile Web Arcade</title>
 
-  <!-- Premium Modern Fonts: Sora (Distinctive Brand & Headings) + Plus Jakarta Sans (Crisp UI & Body) -->
+  <!-- Google Fonts: Orbitron & Rajdhani for Cyberpunk Branding + Plus Jakarta Sans for UI -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Sora:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Rajdhani:wght@600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./style.css">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2310B981'/><text x='16' y='22' font-size='18' text-anchor='middle'>🐍</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><polygon points='16,2 30,10 30,22 16,30 2,22 2,10' fill='%230F111A' stroke='%2300F2FE' stroke-width='2.5'/><polygon points='16,7 24,12 24,20 16,25 8,20 8,12' fill='%2300F2FE'/></svg>">
 </head>
-<body>
+<body class="mobile-body">
 
-  <div class="mobile-app-wrapper">
-    <!-- Autonomous & Interactive Background Slithering Snake Canvas -->
-    <canvas id="bgSnakeCanvas" class="bg-snake-canvas"></canvas>
-
-    <!-- Top Sticky Header -->
-    <header class="mobile-app-header">
-      <div class="header-top-row">
-        <!-- Bespoke Crowned Serpent & Arcade Controller Logo Emblem -->
-        <div class="brand-badge">
-          <div class="brand-logo-emblem">
-            <svg width="44" height="44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <div class="mobile-app-wrapper" id="mobileAppWrapper">
+    <!-- Top Sticky Mobile Header -->
+    <header class="mobile-header" id="mobileHeader">
+      <div class="mobile-header-top">
+        <!-- NEON ARCADE Brand Logo -->
+        <a href="#/" class="mobile-brand-link" id="brandLink">
+          <div class="mobile-brand-emblem">
+            <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="snakeLogoBg" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#059669"/>
-                  <stop offset="45%" stop-color="#0D9488"/>
-                  <stop offset="100%" stop-color="#4F46E5"/>
-                </linearGradient>
-                <linearGradient id="snakeLogoSheen" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.45"/>
-                  <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
-                </linearGradient>
-                <linearGradient id="snakeBodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#6EE7B7"/>
-                  <stop offset="40%" stop-color="#10B981"/>
-                  <stop offset="100%" stop-color="#047857"/>
+                <linearGradient id="cyberHex" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#00F2FE"/>
+                  <stop offset="50%" stop-color="#7928CA"/>
+                  <stop offset="100%" stop-color="#FF007A"/>
                 </linearGradient>
               </defs>
-              <!-- Squircle Base -->
-              <rect x="5" y="5" width="90" height="90" rx="24" fill="url(#snakeLogoBg)"/>
-              <rect x="5" y="5" width="90" height="90" rx="24" stroke="#FDE047" stroke-width="2.5" stroke-opacity="0.9"/>
-              <rect x="5" y="5" width="90" height="45" rx="24" fill="url(#snakeLogoSheen)"/>
-
-              <!-- Stylized Coiled Gaming Serpent Body -->
-              <path d="M22 68 C16 54 22 36 38 34 C54 32 60 44 70 42 C78 40 82 46 80 54 C78 62 66 66 56 64 C42 61 36 74 24 70 Z" fill="url(#snakeBodyGrad)" stroke="#064E3B" stroke-width="1.8"/>
-
-              <!-- Yellow belly accents -->
-              <path d="M26 62 C28 50 36 40 46 38" stroke="#FDE047" stroke-width="3" stroke-linecap="round"/>
-
-              <!-- Snake Head -->
-              <ellipse cx="72" cy="40" rx="14" ry="12" fill="url(#snakeBodyGrad)" stroke="#064E3B" stroke-width="1.5"/>
-
-              <!-- Cheerful Cartoon Eyes -->
-              <ellipse cx="69" cy="35" rx="4.5" ry="5.5" fill="#FFFFFF"/>
-              <circle cx="70.5" cy="35" r="2.8" fill="#0F172A"/>
-              <circle cx="69.5" cy="33.5" r="1.2" fill="#FFFFFF"/>
-
-              <ellipse cx="78" cy="37" rx="3.5" ry="4.5" fill="#FFFFFF"/>
-              <circle cx="79" cy="37" r="2.2" fill="#0F172A"/>
-              <circle cx="78.2" cy="35.8" r="1" fill="#FFFFFF"/>
-
-              <!-- Cute Smiling Red Tongue -->
-              <path d="M84 43 Q89 44 93 43 L91 40 M93 43 L92 46" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/>
-
-              <!-- Golden King Crown on Snake Head 👑 -->
-              <path d="M64 28 L66 20 L71 25 L76 19 L81 25 L84 21 L85 28 Z" fill="#FBBF24" stroke="#D97706" stroke-width="1.2"/>
-              <circle cx="66" cy="19" r="1.5" fill="#EF4444"/>
-              <circle cx="76" cy="18" r="1.5" fill="#3B82F6"/>
-              <circle cx="84" cy="20" r="1.5" fill="#10B981"/>
-
-              <!-- Controller D-pad & Buttons at Bottom -->
-              <rect x="30" y="66" width="36" height="18" rx="7" fill="#FFFFFF" fill-opacity="0.95" stroke="#CBD5E1" stroke-width="1"/>
-              <!-- Mini D-pad -->
-              <path d="M37 72 H41 V70 H43 V72 H47 V74 H43 V76 H41 V74 H37 Z" fill="#4F46E5"/>
-              <!-- Mini Gem Buttons -->
-              <circle cx="53" cy="73" r="2" fill="#EF4444"/>
-              <circle cx="58" cy="71" r="2" fill="#F59E0B"/>
-              <circle cx="61" cy="75" r="2" fill="#10B981"/>
-
-              <!-- Sparkles -->
-              <path d="M16 22 L17.5 17 L22 18.5 L17.5 20 Z" fill="#FDE047"/>
-              <circle cx="86" cy="74" r="2" fill="#FDE047"/>
+              <polygon points="50,6 90,28 90,72 50,94 10,72 10,28" fill="#171A27" stroke="url(#cyberHex)" stroke-width="5"/>
+              <polygon points="50,18 80,35 80,65 50,82 20,65 20,35" fill="#0F111A" stroke="rgba(0, 242, 254, 0.4)" stroke-width="2"/>
+              <path d="M36 50 H44 V42 H48 V50 H56 V54 H48 V62 H44 V54 H36 Z" fill="#00F2FE"/>
+              <circle cx="64" cy="46" r="3.5" fill="#FF007A"/>
+              <circle cx="72" cy="54" r="3.5" fill="#FFD700"/>
             </svg>
           </div>
-          <div class="brand-text-wrap">
-            <span class="brand-title">SNAKE<span class="brand-title-accent">ARCADE</span></span>
-            <span class="brand-sub-badge">🐍 TAP TO FEED • 60FPS</span>
+          <div class="mobile-brand-text">
+            <span class="brand-title">NEON<span class="brand-accent">ARCADE</span></span>
+            <span class="brand-fps-pill">60 FPS • PRO</span>
           </div>
-        </div>
+        </a>
 
-        <div class="header-actions">
-          <!-- Surprise Me / Random Game Header Button -->
-          <button class="btn-surprise-roulette" id="btnHeaderSurprise" title="Surprise Me with a Random Game! (Key: R)">
-            <span>🎲</span>
-            <span class="btn-text-short">Random</span>
+        <!-- Top Right Actions: Sound & Menu -->
+        <div class="mobile-header-actions">
+          <button class="mobile-header-btn" id="btnSoundToggle" title="Toggle Sound (Mute/Unmute)">
+            <span id="soundIcon">🔊</span>
           </button>
-
-          <!-- Ambiance Theme Switcher -->
-          <button class="btn-theme-ambient" id="btnThemeAmbient" title="Change Background Ambiance">☀️</button>
+          <button class="mobile-header-btn" id="btnMobileMenu" title="Menu / Info">
+            <span>☰</span>
+          </button>
         </div>
       </div>
 
-      <!-- Live Search Box with Keyboard Shortcut -->
-      <div class="search-box-wrap">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="mobileSearchInput" class="mobile-search-input" placeholder="Search 15+ handcrafted games..." autocomplete="off">
+      <!-- Full-Width Mobile Search Bar -->
+      <div class="mobile-search-bar">
+        <span class="search-lens-icon">🔍</span>
+        <input type="text" id="mobileSearchInput" class="mobile-search-field" placeholder="Search games..." autocomplete="off">
+        <button class="search-clear-btn hidden" id="btnClearSearch" title="Clear">✕</button>
       </div>
     </header>
 
-    <!-- Warm Human Greeting Banner with Stats -->
-    <div class="user-greeting-card">
-      <div class="user-avatar-wrap">
-        <div class="user-avatar-emoji">🕹️</div>
-        <div class="user-text-info">
-          <div class="user-name">Welcome, Gamer! 👋</div>
-          <div class="user-subtitle">Tap empty background to feed the snake!</div>
+    <!-- Horizontal Category Bar -->
+    <nav class="mobile-category-bar" id="mobileCategoryBar">
+      <button class="category-pill active" data-cat="all">⚡ All</button>
+      <button class="category-pill" data-cat="top">🔥 Top Played</button>
+      <button class="category-pill" data-cat="arcade">👾 Arcade</button>
+      <button class="category-pill" data-cat="puzzle">🧩 Puzzle</button>
+      <button class="category-pill" data-cat="reflex">⚡ Reflex</button>
+      <button class="category-pill" data-cat="sports">🏀 Sports</button>
+      <button class="category-pill" data-cat="racing">🏎️ Racing</button>
+      <button class="category-pill" data-cat="favorites">❤️ Favorites</button>
+    </nav>
+
+    <!-- Mobile Hero (Height: 220-280px) -->
+    <section class="mobile-hero-section">
+      <div class="mobile-hero-card" id="mobileHeroCard">
+        <div class="hero-tag-badge">
+          <span class="hero-live-dot"></span>
+          <span>FEATURED OF THE DAY</span>
         </div>
+        <div class="hero-body-content">
+          <div class="hero-artwork-frame" id="heroArtworkFrame">
+            <!-- Rendered with high-res SVG art -->
+          </div>
+          <div class="hero-text-details">
+            <span class="hero-category-tag" id="heroCategoryTag">ACTION & TIMING</span>
+            <h1 class="hero-title" id="heroTitle">Blade Dash</h1>
+            <p class="hero-desc" id="heroDesc">Fling steel daggers into spinning targets with pure adrenaline.</p>
+          </div>
+        </div>
+        <button class="hero-play-btn" id="btnHeroPlay">
+          <span>PLAY NOW</span> ▶
+        </button>
       </div>
-      
-      <div class="user-stats-strip">
-        <!-- Snake Fed Counter -->
-        <div class="stat-chip snake-fed-chip" id="snakeFedChip" title="Click anywhere on empty screen background to feed the snake!">
-          <span>🐍</span>
-          <span>Fed: <strong id="snakeFedVal">0</strong></span>
-        </div>
+    </section>
 
-        <!-- Total Plays Counter -->
-        <div class="stat-chip" title="Total Games Played">
-          <span>🎮</span>
-          <span>Plays: <strong id="totalPlaysVal">0</strong></span>
+    <!-- Main Mobile Games Container -->
+    <main class="mobile-content-container">
+      <!-- Section Heading -->
+      <div class="mobile-section-header">
+        <div class="section-title-wrap">
+          <h2 class="section-title" id="sectionTitle">ALL GAMES</h2>
+          <span class="section-subtext" id="sectionSubtext">15 Handcrafted Arcade Titles</span>
         </div>
+        <span class="section-count-badge" id="gamesCountBadge">15</span>
+      </div>
 
-        <div class="streak-badge-flame">
-          <span class="flame-icon">⚡</span>
-          <span>60 FPS</span>
+      <!-- 2-Column Game Grid -->
+      <div class="mobile-game-grid" id="mobileGameGrid">
+        <!-- Rendered dynamically by app.js: 2 cards per row -->
+      </div>
+    </main>
+
+    <!-- Fixed Mobile Bottom Navigation (Hidden during gameplay) -->
+    <nav class="mobile-bottom-nav" id="mobileBottomNav">
+      <div class="bottom-nav-item active" data-nav="home">
+        <span class="nav-svg">🎮</span>
+        <span class="nav-label">Home</span>
+      </div>
+      <div class="bottom-nav-item" data-nav="categories">
+        <span class="nav-svg">📂</span>
+        <span class="nav-label">Categories</span>
+      </div>
+      <div class="bottom-nav-item" data-nav="favorites">
+        <span class="nav-svg">❤️</span>
+        <span class="nav-label">Favorites</span>
+      </div>
+      <div class="bottom-nav-item" data-nav="recent">
+        <span class="nav-svg">🕒</span>
+        <span class="nav-label">Recent</span>
+      </div>
+      <div class="bottom-nav-item" data-nav="profile">
+        <span class="nav-svg">👤</span>
+        <span class="nav-label">Profile</span>
+      </div>
+    </nav>
+
+    <!-- Mobile Slide-out Menu Drawer -->
+    <div class="mobile-drawer-overlay hidden" id="drawerOverlay">
+      <div class="mobile-drawer-panel">
+        <div class="drawer-header">
+          <span class="drawer-brand">NEON ARCADE</span>
+          <button class="drawer-close-btn" id="btnCloseDrawer">✕</button>
+        </div>
+        <div class="drawer-stats">
+          <div class="drawer-stat-item">
+            <span class="stat-number" id="drawerTotalPlayed">0</span>
+            <span class="stat-label">Total Plays</span>
+          </div>
+          <div class="drawer-stat-item">
+            <span class="stat-number" id="drawerFavoritesCount">0</span>
+            <span class="stat-label">Favorites</span>
+          </div>
+        </div>
+        <div class="drawer-links">
+          <button class="drawer-link-btn" id="btnDrawerRandom">🎲 Play Random Game</button>
+          <button class="drawer-link-btn" id="btnDrawerDesktop">💻 View Desktop Version</button>
         </div>
       </div>
     </div>
 
-    <!-- Spotlight Game of the Day -->
-    <section class="spotlight-section">
-      <div class="spotlight-hero-card" id="spotlightCard">
-        <div class="spotlight-badge-row">
-          <span class="spotlight-tag">🌟 GAME OF THE DAY</span>
-          <span class="spotlight-rating">★ 4.9 (3.4k plays)</span>
-        </div>
-        <div class="spotlight-body">
-          <div class="spotlight-icon">
-            <!-- Rendered dynamically by app.js with SVG artwork -->
-          </div>
-          <div class="spotlight-info">
-            <h2 class="spotlight-title">Blade Dash: Target Master</h2>
-            <p class="spotlight-desc">Fling sharp steel daggers into spinning timber targets. Pure timing adrenaline!</p>
-          </div>
-        </div>
-        <div class="spotlight-actions-row">
-          <button class="btn-spotlight-play" id="btnSpotlightPlay">
-            <span>▶ PLAY NOW — 1 CLICK</span>
-          </button>
-          <button class="btn-spotlight-surprise" id="btnHeroSurprise">
-            <span>🎲 SURPRISE ME (RANDOM)</span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Category Filter Pills (Horizontal Scroll) -->
-    <nav class="categories-scroll-row" id="categoriesRow">
-      <button class="cat-pill active" data-cat="all">⚡ All 15 Games</button>
-      <button class="cat-pill" data-cat="action">🎯 Action & Reflex</button>
-      <button class="cat-pill" data-cat="arcade">👾 Classic Arcade</button>
-      <button class="cat-pill" data-cat="puzzle">🧩 Brain & Puzzles</button>
-      <button class="cat-pill" data-cat="sports">🏀 Sports & Aim</button>
-      <button class="cat-pill" data-cat="favorites">❤️ Saved Games</button>
-    </nav>
-
-    <!-- Main Games Content -->
-    <main class="mobile-games-content">
-      <div class="section-label-row">
-        <div class="section-title-wrap">
-          <span class="section-label">GAMES CATALOG</span>
-          <span class="section-counter" id="gamesCountBadge">15 Games</span>
-        </div>
-
-        <!-- Sorting Pills -->
-        <div class="sort-controls">
-          <button class="sort-chip active" data-sort="popular">🔥 Popular</button>
-          <button class="sort-chip" data-sort="top">🏆 Best Score</button>
-          <button class="sort-chip" data-sort="az">🔤 A-Z</button>
-        </div>
-      </div>
-
-      <div class="games-grid" id="mobileGamesGrid">
-        <!-- Rendered dynamically by app.js with rich vector artwork -->
-      </div>
-    </main>
-
-    <!-- Bottom Navigation Bar (Phones) -->
-    <nav class="mobile-bottom-nav">
-      <div class="nav-item active" data-view="home">
-        <span class="nav-icon">🎮</span>
-        <span>Games</span>
-      </div>
-      <div class="nav-item" data-view="top">
-        <span class="nav-icon">🏆</span>
-        <span>Top</span>
-      </div>
-      <div class="nav-item" data-view="favorites">
-        <span class="nav-icon">❤️</span>
-        <span>Favorites</span>
-      </div>
-    </nav>
-
-    <!-- Fullscreen Game Player Modal -->
-    <div class="game-player-modal" id="gamePlayerModal">
-      <!-- Player Top HUD -->
-      <div class="player-top-bar">
-        <button class="btn-back-arcade" id="btnExitGame">
+    <!-- Fullscreen Dedicated Mobile Game Interface (100dvh) -->
+    <div class="mobile-game-modal" id="gamePlayerModal">
+      <!-- Top HUD -->
+      <div class="modal-top-hud">
+        <button class="btn-hud-back" id="btnExitGame" title="Exit to Arcade">
           <span>◀</span>
           <span>Exit</span>
         </button>
 
-        <div class="player-title-info">
-          <span class="player-title-text" id="playerGameTitle">Game Name</span>
-          <div class="player-stats-row">
-            <span class="score-pill">Score: <strong id="hudScore">0</strong></span>
-            <span class="best-pill">Best: <strong id="hudBest">0</strong></span>
+        <div class="modal-title-hud">
+          <span class="modal-game-name" id="playerGameTitle">Game Name</span>
+          <div class="modal-scores-row">
+            <span class="hud-score-chip">SCORE: <strong id="hudScore">0</strong></span>
+            <span class="hud-best-chip">BEST: <strong id="hudBest">0</strong></span>
           </div>
         </div>
 
-        <div class="player-hud-actions">
-          <button class="btn-top-action" id="btnPauseGame" title="Pause Game (Esc / P)">⏸️</button>
-          <button class="btn-top-action" id="btnFullscreenGame" title="Toggle Fullscreen">⛶</button>
-          <button class="btn-top-action" id="btnMuteAudio" title="Mute / Unmute Sound">🔊</button>
+        <div class="modal-hud-right">
+          <button class="btn-hud-round" id="btnPauseGame" title="Pause Game">⏸️</button>
+          <button class="btn-hud-round" id="btnMuteAudio" title="Mute">🔊</button>
         </div>
       </div>
 
-      <!-- Player Canvas Viewport -->
-      <div class="player-canvas-area" id="canvasWrap">
-        <div class="canvas-frame-box" id="canvasFrameBox">
-          <canvas class="player-canvas" id="playerCanvas"></canvas>
+      <!-- Center Game Canvas Viewport -->
+      <div class="modal-canvas-viewport" id="canvasWrap">
+        <div class="modal-canvas-frame" id="canvasFrame">
+          <canvas class="modal-player-canvas" id="playerCanvas"></canvas>
         </div>
+      </div>
 
-        <!-- Controls Helper Hint Bar -->
-        <div class="game-controls-helper" id="gameControlsHelper">
-          <span class="helper-icon">💡</span>
-          <span class="helper-text" id="controlsHelperText">Tap / Click / Space to play!</span>
-        </div>
+      <!-- Bottom Dedicated Touch Controls -->
+      <div class="modal-touch-controls" id="gameTouchControls">
+        <!-- Injected dynamically based on active game -->
+      </div>
 
-        <!-- Frosted Glass Pause Overlay -->
-        <div class="game-pause-overlay hidden" id="gamePauseOverlay">
-          <div class="pause-dialog-card">
-            <div class="pause-emoji">⏸️</div>
-            <h2 class="pause-title">GAME PAUSED</h2>
-            <p class="pause-subtitle">Take a breather! Your score and progress are saved.</p>
-            <div class="pause-actions">
-              <button class="btn-primary-action" id="btnResumeGame">▶ RESUME PLAYING (ESC)</button>
-              <button class="btn-secondary-action" id="btnRestartFromPause">🔄 RESTART ROUND</button>
-              <button class="btn-secondary-action" id="btnExitFromPause">◀ EXIT TO ARCADE</button>
-            </div>
+      <!-- Mobile Pause Menu Overlay -->
+      <div class="modal-pause-overlay hidden" id="gamePauseOverlay">
+        <div class="pause-menu-card">
+          <div class="pause-tag-glow">⏸️</div>
+          <h2 class="pause-heading">PAUSED</h2>
+          <p class="pause-subtext">Game state paused. Take your time!</p>
+          <div class="pause-menu-buttons">
+            <button class="btn-pause-primary" id="btnResumeGame">▶ RESUME</button>
+            <button class="btn-pause-secondary" id="btnRestartFromPause">🔄 RESTART</button>
+            <button class="btn-pause-secondary" id="btnExitFromPause">◀ EXIT GAME</button>
           </div>
         </div>
+      </div>
 
-        <!-- Clean Game Over Dialog -->
-        <div class="game-over-overlay hidden" id="gameOverDialog">
-          <div class="over-dialog-card">
-            <div class="over-emoji">🏁</div>
-            <h2 class="over-title">ROUND FINISHED!</h2>
-            <div class="new-best-badge" id="newBestBanner" style="display: none;">🎉 NEW PERSONAL BEST! 🎉</div>
-            
-            <div class="score-stats-grid">
-              <div class="score-box">
-                <span class="box-val" id="dialogFinalScore">0</span>
-                <span class="box-lbl">Your Score</span>
-              </div>
-              <div class="score-box">
-                <span class="box-val" id="dialogBestScore" style="color: var(--accent-amber);">0</span>
-                <span class="box-lbl">High Score</span>
-              </div>
+      <!-- Mobile Game Over Screen -->
+      <div class="modal-gameover-overlay hidden" id="gameOverDialog">
+        <div class="gameover-card">
+          <div class="new-record-banner hidden" id="newBestBanner">🎉 NEW HIGH SCORE!</div>
+          <h2 class="gameover-heading">GAME OVER</h2>
+          <div class="gameover-score-grid">
+            <div class="score-box">
+              <span class="score-label">SCORE</span>
+              <span class="score-value" id="dialogFinalScore">0</span>
             </div>
-
-            <div class="dialog-actions">
-              <button class="btn-primary-action" id="btnPlayAgain">PLAY AGAIN (1-TAP)</button>
-              <button class="btn-secondary-action" id="btnExitFromOver">BACK TO ALL GAMES</button>
+            <div class="score-box highlight">
+              <span class="score-label">BEST</span>
+              <span class="score-value" id="dialogBestScore">0</span>
             </div>
+          </div>
+          <div class="gameover-actions">
+            <button class="btn-gameover-play" id="btnPlayAgain">🔄 PLAY AGAIN</button>
+            <button class="btn-gameover-exit" id="btnExitFromOver">◀ EXIT TO ARCADE</button>
           </div>
         </div>
       </div>

@@ -1,8 +1,6 @@
 import { mobileAudio } from './engine/Audio.js';
 import { mobileStorage } from './engine/Storage.js';
-import { BgSnake } from './engine/BgSnake.js';
 import { GAME_ARTWORK } from './engine/GameArtwork.js';
-import { snakeTransition } from './engine/SnakeTransition.js';
 
 // Import All 15 Distinct Playable Games
 import { KnifeHitGame } from './games/KnifeHit.js';
@@ -24,197 +22,197 @@ import { SpaceShooterMobile } from './games/SpaceShooter.js';
 export const MOBILE_GAMES = [
   {
     id: 'knife-hit',
-    title: 'Blade Dash: Target Master',
-    category: 'action',
-    categoryName: 'Action & Timing',
-    desc: 'Fling sharp steel daggers into spinning timber targets. Pure timing adrenaline!',
+    title: 'Blade Dash',
+    fullName: 'Blade Dash: Target Master',
+    category: 'reflex',
+    categoryName: 'Reflex & Action',
+    desc: 'Fling steel kunai blades into spinning timber targets. Pure timing adrenaline!',
     icon: '🎯',
-    color: '#4F46E5',
-    bg: '#EEF2FF',
-    badge: '★ Featured',
-    controls: '🖱️ Tap / Space / Click to fling dagger into rotating target.',
+    color: '#00F2FE',
+    badge: 'HOT',
+    controlsType: 'tap',
     factory: (canvas, audio, onScore, onGameOver) => new KnifeHitGame(canvas, audio, onScore, onGameOver)
   },
   {
     id: 'fruit-snake',
-    title: 'Snaky: Garden Fruit Quest',
+    title: 'Cyber Snake',
+    fullName: 'Cyber Snake: Neon Fruit Quest',
     category: 'arcade',
-    categoryName: 'Classic Arcade',
-    desc: 'Guide the lively emerald serpent, gobble sweet orchard apples, and set records.',
+    categoryName: 'Arcade Classics',
+    desc: 'Steer the glowing neon serpent, devour energy apples, and shatter records.',
     icon: '🐍',
     color: '#10B981',
-    bg: '#ECFDF5',
-    badge: 'Classic',
-    controls: '⬆️ ⬇️ ⬅️ ➡️ Arrow keys or Swipe screen to steer snake.',
+    badge: 'CLASSIC',
+    controlsType: 'dpad',
     factory: (canvas, audio, onScore, onGameOver) => new SnakeGame(canvas, audio, onScore, onGameOver)
   },
   {
     id: 'color-bounce',
-    title: 'Color Hop: Ring Switch 3D',
+    title: 'Color Switch',
+    fullName: 'Color Switch: Ring Hopper',
     category: 'reflex',
-    categoryName: 'Reflex & Rhythm',
-    desc: 'Bounce through spinning multi-color rings matching your glowing ball color.',
+    categoryName: 'Reflex & Action',
+    desc: 'Hop through spinning neon rings matching your glowing ball color.',
     icon: '🎨',
-    color: '#0284C7',
-    bg: '#F0F9FF',
-    badge: 'Trending',
-    controls: '🖱️ Tap / Space to hop ball up through matching colored arcs.',
+    color: '#00F2FE',
+    badge: 'POPULAR',
+    controlsType: 'tap',
     factory: (canvas, audio, onScore, onGameOver) => new ColorBounceGame(canvas, audio, onScore, onGameOver)
   },
   {
     id: 'tower-stack',
-    title: 'Stack City: Skyscraper 3D',
+    title: 'Stack 3D',
+    fullName: 'Stack 3D: Skyscraper',
     category: 'reflex',
-    categoryName: 'Precision & Reflex',
-    desc: 'Stack moving pastel high-rise slabs with pure timing. Overhangs get sliced!',
+    categoryName: 'Reflex & Action',
+    desc: 'Stack moving high-rise cyber slabs with precision. Overhangs get sliced!',
     icon: '🏙️',
-    color: '#8B5CF6',
-    bg: '#F5F3FF',
-    badge: 'Popular',
-    controls: '🖱️ Tap / Space to drop block at perfect vertical alignment.',
+    color: '#7928CA',
+    badge: 'TRENDING',
+    controlsType: 'tap',
     factory: (canvas, audio, onScore, onGameOver) => new TowerStackGame(canvas, audio, onScore, onGameOver)
   },
   {
     id: 'flappy-aviator',
-    title: 'Sky Glider: Aviator Wings',
-    category: 'action',
-    categoryName: 'Action & Flight',
-    desc: 'Glide an aviator bird through tricky green pillars with silky aerodynamic flight.',
+    title: 'Flappy Wings',
+    fullName: 'Flappy Wings: Aviator Dash',
+    category: 'reflex',
+    categoryName: 'Reflex & Action',
+    desc: 'Glide an aviator bird through laser green columns with aerodynamic flight.',
     icon: '🐥',
-    color: '#F59E0B',
-    bg: '#FFFBEB',
-    badge: 'Addictive',
-    controls: '🖱️ Tap / Space to flap wings and glide through gaps safely.',
+    color: '#FFD700',
+    badge: 'ADDICTIVE',
+    controlsType: 'flappy',
     factory: (canvas, audio, onScore, onGameOver) => new FlappyBirdGame(canvas, audio, onScore, onGameOver)
   },
   {
     id: 'game-2048',
-    title: '2048 Deluxe: Pastel Numbers',
+    title: '2048 Neon',
+    fullName: '2048 Neon: Puzzle Grid',
     category: 'puzzle',
-    categoryName: 'Brain & Logic',
-    desc: 'Slide and combine matching numeric tiles across 4x4 grid to reach 2048!',
+    categoryName: 'Puzzle & Logic',
+    desc: 'Slide and merge matching cyber number tiles across a 4x4 grid to reach 2048!',
     icon: '🔢',
     color: '#6366F1',
-    bg: '#EEF2FF',
-    badge: 'Top Pick',
-    controls: '⬆️ ⬇️ ⬅️ ➡️ Arrow keys or Swipe to slide & merge matching numbers.',
+    badge: 'BRAIN',
+    controlsType: 'dpad',
     factory: (canvas, audio, onScore, onGameOver) => new Game2048Mobile(canvas, audio, onScore, onGameOver)
   },
   {
     id: 'dunk-shot',
-    title: 'Street Hoops: Dunk Champion',
+    title: 'Street Hoops',
+    fullName: 'Street Hoops: Dunk Master',
     category: 'sports',
-    categoryName: 'Sports & Aim',
-    desc: 'Pull back slingshot trajectory to swish basketballs into floating hoops.',
+    categoryName: 'Sports & Physics',
+    desc: 'Drag back slingshot trajectory to swish basketballs into floating hoops.',
     icon: '🏀',
     color: '#EA580C',
-    bg: '#FFF7ED',
-    badge: 'Hot',
-    controls: '🖱️ Drag back and release to shoot ball into moving basket.',
+    badge: 'HOT',
+    controlsType: 'drag',
     factory: (canvas, audio, onScore, onGameOver) => new DunkShotGame(canvas, audio, onScore, onGameOver)
   },
   {
     id: 'highway-racer',
-    title: 'Nitro Chase: Highway Rush 3D',
-    category: 'action',
+    title: 'Nitro Chase',
+    fullName: 'Nitro Chase: Highway Rush',
+    category: 'racing',
     categoryName: 'Racing & Speed',
-    desc: 'Weave across 3 turbo highway lanes, dodge commuter traffic, and pop nitro!',
+    desc: 'Weave across 3 turbo highway lanes, dodge commuter traffic, and hit nitro!',
     icon: '🏎️',
-    color: '#F43F5E',
-    bg: '#FFF1F2',
-    badge: 'Fast',
-    controls: '⬅️ ➡️ Left/Right arrow keys or tap screen sides to switch lanes.',
+    color: '#FF007A',
+    badge: 'FAST',
+    controlsType: 'racing',
     factory: (canvas, audio, onScore, onGameOver) => new HighwayRacerMobile(canvas, audio, onScore, onGameOver)
   },
   {
     id: 'brick-breaker',
-    title: 'Prism Breaker: Neon Brick Blast',
+    title: 'Prism Blast',
+    fullName: 'Prism Blast: Brick Breaker',
     category: 'arcade',
-    categoryName: 'Classic Arcade',
-    desc: 'Demolish glowing prism bricks with high-velocity laser balls and paddle spin.',
+    categoryName: 'Arcade Classics',
+    desc: 'Demolish glowing prism bricks with laser balls and high-speed paddle spin.',
     icon: '🧱',
     color: '#06B6D4',
-    bg: '#ECFEFF',
-    badge: 'Retro',
-    controls: '🖱️ Move paddle left/right with touch or mouse to bounce laser ball.',
+    badge: 'RETRO',
+    controlsType: 'paddle',
     factory: (canvas, audio, onScore, onGameOver) => new BrickBreakerMobile(canvas, audio, onScore, onGameOver)
   },
   {
     id: 'whack-a-mole',
-    title: 'Bot Buster: Reflex Frenzy',
+    title: 'Bot Buster',
+    fullName: 'Bot Buster: Reflex Frenzy',
     category: 'reflex',
-    categoryName: 'Reflex & Speed',
-    desc: 'Smash mischievous yellow bots as they pop out of 9 bunker holes before time runs out.',
+    categoryName: 'Reflex & Action',
+    desc: 'Smash mischievous cyber bots as they pop out of bunker hatches.',
     icon: '🔨',
-    color: '#4F46E5',
-    bg: '#EEF2FF',
-    badge: 'Frenzy',
-    controls: '🖱️ Tap or click smiling bots as they jump from holes.',
+    color: '#00F2FE',
+    badge: 'SPEED',
+    controlsType: 'tap',
     factory: (canvas, audio, onScore, onGameOver) => new WhackAMoleGame(canvas, audio, onScore, onGameOver)
   },
   {
     id: 'memory-matrix',
-    title: 'Memory Magic: Flip & Match',
+    title: 'Memory Cards',
+    fullName: 'Memory Cards: Hologram Match',
     category: 'puzzle',
-    categoryName: 'Brain & Memory',
+    categoryName: 'Puzzle & Logic',
     desc: 'Flip 16 enchanted holographic cards to uncover matching pairs in minimum moves.',
     icon: '🃏',
-    color: '#A855F7',
-    bg: '#FAF5FF',
-    badge: 'Mind',
-    controls: '🖱️ Tap cards to flip and reveal matching pairs.',
+    color: '#7928CA',
+    badge: 'MEMORY',
+    controlsType: 'tap',
     factory: (canvas, audio, onScore, onGameOver) => new MemoryCardsMobile(canvas, audio, onScore, onGameOver)
   },
   {
     id: 'zigzag-runner',
-    title: 'ZigZag Canyon: Crystal Run',
+    title: 'ZigZag Run',
+    fullName: 'ZigZag Run: Crystal Path',
     category: 'reflex',
     categoryName: 'Reflex & Action',
     desc: 'Tap to make sharp 90° turns along endless floating isometric cliff paths.',
     icon: '⚡',
-    color: '#EC4899',
-    bg: '#FDF2F8',
-    badge: 'Addictive',
-    controls: '🖱️ Tap / Space / Click to switch 90° direction on walkway.',
+    color: '#FF007A',
+    badge: 'REFLEX',
+    controlsType: 'tap',
     factory: (canvas, audio, onScore, onGameOver) => new ZigZagGame(canvas, audio, onScore, onGameOver)
   },
   {
     id: 'tictactoe-ai',
-    title: 'Master XO: Neural Duel',
+    title: 'Master XO',
+    fullName: 'Master XO: Cyber AI Duel',
     category: 'puzzle',
-    categoryName: 'Puzzle & Strategy',
-    desc: 'Challenge an intelligent tactical neural AI on a sleek minimalist board.',
+    categoryName: 'Puzzle & Logic',
+    desc: 'Challenge an intelligent tactical neural AI on a sleek cyber board.',
     icon: '⭕',
-    color: '#64748B',
-    bg: '#F8FAFC',
-    badge: 'Strategy',
-    controls: '🖱️ Tap any empty square to place your symbol.',
+    color: '#A7ADBF',
+    badge: 'TACTIC',
+    controlsType: 'tap',
     factory: (canvas, audio, onScore, onGameOver) => new TicTacToeMobile(canvas, audio, onScore, onGameOver)
   },
   {
     id: 'pong-rally',
-    title: 'Smash Rally: Pro Table Tennis',
+    title: 'Smash Pong',
+    fullName: 'Smash Pong: Pro Table Tennis',
     category: 'sports',
-    categoryName: 'Sports & AI',
-    desc: 'Drag paddle to spin powerful table tennis returns past the robot goalkeeper.',
+    categoryName: 'Sports & Physics',
+    desc: 'Drag paddle to spin powerful table tennis returns past the robot opponent.',
     icon: '🏓',
-    color: '#0284C7',
-    bg: '#F0F9FF',
-    badge: 'Rally',
-    controls: '🖱️ Drag paddle vertically with finger or mouse to rally ball.',
+    color: '#00F2FE',
+    badge: 'SPORTS',
+    controlsType: 'paddle',
     factory: (canvas, audio, onScore, onGameOver) => new PongRallyMobile(canvas, audio, onScore, onGameOver)
   },
   {
     id: 'space-defender',
-    title: 'Star Strike: Galaxy Invaders',
+    title: 'Star Strike',
+    fullName: 'Star Strike: Galaxy Invaders',
     category: 'arcade',
-    categoryName: 'Arcade Shooter',
+    categoryName: 'Arcade Classics',
     desc: 'Pilot a twin-plasma starfighter through asteroid fields blasting alien armadas.',
     icon: '🚀',
-    color: '#4F46E5',
-    bg: '#EEF2FF',
-    badge: 'Epic',
-    controls: '🖱️ Drag starfighter to steer. Rapid lasers fire automatically!',
+    color: '#7928CA',
+    badge: 'EPIC',
+    controlsType: 'shooter',
     factory: (canvas, audio, onScore, onGameOver) => new SpaceShooterMobile(canvas, audio, onScore, onGameOver)
   }
 ];
@@ -222,10 +220,10 @@ export const MOBILE_GAMES = [
 class MobileApp {
   constructor() {
     this.currentCategory = 'all';
-    this.currentSort = 'popular';
     this.searchQuery = '';
     this.activeGameInstance = null;
     this.activeGameLoop = null;
+    this.currentGame = null;
     this.currentScore = 0;
     this.currentHighScore = 0;
     this.isPaused = false;
@@ -233,11 +231,12 @@ class MobileApp {
 
     this.initDOM();
     this.bindEvents();
+    this.renderHero();
     this.renderGameList();
   }
 
   initDOM() {
-    this.gridEl = document.getElementById('mobileGamesGrid');
+    this.gridEl = document.getElementById('mobileGameGrid');
     this.playerModal = document.getElementById('gamePlayerModal');
     this.playerCanvas = document.getElementById('playerCanvas');
     this.scoreValEl = document.getElementById('hudScore');
@@ -247,136 +246,148 @@ class MobileApp {
     this.pauseDialog = document.getElementById('gamePauseOverlay');
     this.dialogFinalScore = document.getElementById('dialogFinalScore');
     this.dialogBestScore = document.getElementById('dialogBestScore');
-    this.totalPlaysEl = document.getElementById('totalPlaysVal');
-    this.snakeFedValEl = document.getElementById('snakeFedVal');
-    this.controlsHelperText = document.getElementById('controlsHelperText');
+    this.touchControlsEl = document.getElementById('gameTouchControls');
+    this.sectionTitleEl = document.getElementById('sectionTitle');
+    this.sectionSubtextEl = document.getElementById('sectionSubtext');
+    this.gamesCountBadge = document.getElementById('gamesCountBadge');
+  }
 
-    if (this.totalPlaysEl) {
-      this.totalPlaysEl.textContent = mobileStorage.getTotalPlayed();
+  renderHero() {
+    const feat = MOBILE_GAMES[0]; // Blade Dash
+    const artFrame = document.getElementById('heroArtworkFrame');
+    if (artFrame && GAME_ARTWORK[feat.id]) {
+      artFrame.innerHTML = GAME_ARTWORK[feat.id];
     }
+    const titleEl = document.getElementById('heroTitle');
+    const descEl = document.getElementById('heroDesc');
+    const tagEl = document.getElementById('heroCategoryTag');
+    if (titleEl) titleEl.textContent = feat.title;
+    if (descEl) descEl.textContent = feat.desc;
+    if (tagEl) tagEl.textContent = feat.categoryName.toUpperCase();
 
-    // Initialize Autonomous Background Snake with Feed Callback
-    const snakeCanvas = document.getElementById('bgSnakeCanvas');
-    if (snakeCanvas) {
-      this.bgSnake = new BgSnake(snakeCanvas, (fruitsCount) => {
-        if (this.snakeFedValEl) {
-          this.snakeFedValEl.textContent = fruitsCount;
-          this.snakeFedValEl.parentElement?.classList.add('snack-pop');
-          setTimeout(() => this.snakeFedValEl.parentElement?.classList.remove('snack-pop'), 400);
-        }
-      });
-    }
-
-    // Set Spotlight Card Icon & Info
-    const spotlightIconEl = document.querySelector('.spotlight-icon');
-    if (spotlightIconEl && GAME_ARTWORK['knife-hit']) {
-      spotlightIconEl.innerHTML = GAME_ARTWORK['knife-hit'];
+    const heroBtn = document.getElementById('btnHeroPlay');
+    if (heroBtn) {
+      heroBtn.onclick = () => {
+        mobileAudio.tap();
+        this.launchGame(feat);
+      };
     }
   }
 
   bindEvents() {
-    // Spotlight hero card play button
-    const btnSpotlight = document.getElementById('btnSpotlightPlay');
-    if (btnSpotlight) {
-      btnSpotlight.addEventListener('click', () => {
+    // Sound Toggle Header Button
+    const btnSound = document.getElementById('btnSoundToggle');
+    const soundIcon = document.getElementById('soundIcon');
+    if (btnSound) {
+      btnSound.addEventListener('click', () => {
+        const isMuted = mobileAudio.toggleMute();
+        if (soundIcon) soundIcon.textContent = isMuted ? '🔇' : '🔊';
         mobileAudio.tap();
-        const feat = MOBILE_GAMES.find(g => g.id === 'knife-hit') || MOBILE_GAMES[0];
-        this.launchGame(feat);
       });
     }
 
-    // Surprise Me / Random Game Roulette Buttons
-    const surpriseBtns = [
-      document.getElementById('btnHeaderSurprise'),
-      document.getElementById('btnHeroSurprise')
-    ];
-    surpriseBtns.forEach(btn => {
-      if (btn) {
-        btn.addEventListener('click', () => {
-          this.launchRandomGame();
-        });
-      }
+    // Mobile Menu Drawer
+    const btnMenu = document.getElementById('btnMobileMenu');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+    const btnCloseDrawer = document.getElementById('btnCloseDrawer');
+    if (btnMenu && drawerOverlay) {
+      btnMenu.addEventListener('click', () => {
+        mobileAudio.tap();
+        drawerOverlay.classList.remove('hidden');
+        const playsEl = document.getElementById('drawerTotalPlayed');
+        const favsEl = document.getElementById('drawerFavoritesCount');
+        if (playsEl) playsEl.textContent = mobileStorage.getTotalPlayed();
+        if (favsEl) favsEl.textContent = mobileStorage.getFavorites().length;
+      });
+    }
+    if (btnCloseDrawer && drawerOverlay) {
+      btnCloseDrawer.addEventListener('click', () => {
+        mobileAudio.tap();
+        drawerOverlay.classList.add('hidden');
+      });
+      drawerOverlay.addEventListener('click', (e) => {
+        if (e.target === drawerOverlay) drawerOverlay.classList.add('hidden');
+      });
+    }
+
+    // Drawer Action Buttons
+    document.getElementById('btnDrawerRandom')?.addEventListener('click', () => {
+      drawerOverlay?.classList.add('hidden');
+      this.launchRandomGame();
+    });
+    document.getElementById('btnDrawerDesktop')?.addEventListener('click', () => {
+      window.location.href = '/?view=desktop';
     });
 
-    // Ambiance Theme Switcher
-    const btnAmbient = document.getElementById('btnThemeAmbient');
-    if (btnAmbient) {
-      const themes = ['☀️', '🌅', '🌿', '🌌'];
-      let themeIdx = 0;
-      btnAmbient.addEventListener('click', () => {
-        mobileAudio.click();
-        themeIdx = (themeIdx + 1) % themes.length;
-        btnAmbient.textContent = themes[themeIdx];
-        document.body.className = `theme-${['white', 'sunset', 'mint', 'lavender'][themeIdx]}`;
-      });
-    }
-
-    // Category pill filtering
-    const pills = document.querySelectorAll('.cat-pill');
+    // Category Bar Pills
+    const pills = document.querySelectorAll('.category-pill');
     pills.forEach(pill => {
       pill.addEventListener('click', () => {
         mobileAudio.tap();
         pills.forEach(p => p.classList.remove('active'));
         pill.classList.add('active');
         this.currentCategory = pill.dataset.cat;
+        this.updateSectionHeading(this.currentCategory);
         this.renderGameList();
       });
     });
 
-    // Sort Pills
-    const sortChips = document.querySelectorAll('.sort-chip');
-    sortChips.forEach(chip => {
-      chip.addEventListener('click', () => {
-        mobileAudio.tap();
-        sortChips.forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
-        this.currentSort = chip.dataset.sort;
-        this.renderGameList();
-      });
-    });
-
-    // Search bar live filter
+    // Live Search
     const searchInput = document.getElementById('mobileSearchInput');
+    const clearBtn = document.getElementById('btnClearSearch');
     if (searchInput) {
       searchInput.addEventListener('input', (e) => {
         this.searchQuery = e.target.value.toLowerCase().trim();
+        if (clearBtn) clearBtn.classList.toggle('hidden', !this.searchQuery);
         this.renderGameList();
       });
 
-      // Quick keyboard shortcut: '/' to focus search
-      window.addEventListener('keydown', (e) => {
-        if (e.key === '/' && document.activeElement !== searchInput && !this.playerModal.classList.contains('active')) {
-          e.preventDefault();
-          searchInput.focus();
-        } else if (e.key === 'r' && !this.playerModal.classList.contains('active') && document.activeElement !== searchInput) {
-          e.preventDefault();
-          this.launchRandomGame();
-        } else if (e.key === 'm' && document.activeElement !== searchInput) {
-          const isMuted = mobileAudio.toggleMute();
-          const muteBtn = document.getElementById('btnMuteAudio');
-          if (muteBtn) muteBtn.textContent = isMuted ? '🔇' : '🔊';
-        }
-      });
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          searchInput.value = '';
+          this.searchQuery = '';
+          clearBtn.classList.add('hidden');
+          this.renderGameList();
+        });
+      }
     }
 
-    // Modal back / exit button
+    // Bottom Navigation Bar
+    const navItems = document.querySelectorAll('.bottom-nav-item');
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        mobileAudio.tap();
+        navItems.forEach(n => n.classList.remove('active'));
+        item.classList.add('active');
+        const nav = item.dataset.nav;
+
+        if (nav === 'home') {
+          this.selectCategory('all');
+        } else if (nav === 'categories') {
+          document.getElementById('mobileCategoryBar')?.scrollIntoView({ behavior: 'smooth' });
+        } else if (nav === 'favorites') {
+          this.selectCategory('favorites');
+        } else if (nav === 'recent' || nav === 'profile') {
+          btnMenu?.click();
+        }
+      });
+    });
+
+    // Game Player Modal Controls
     document.getElementById('btnExitGame')?.addEventListener('click', () => {
       mobileAudio.tap();
       this.exitActiveGame();
     });
 
-    // Modal mute button
+    document.getElementById('btnPauseGame')?.addEventListener('click', () => {
+      this.togglePause();
+    });
+
     document.getElementById('btnMuteAudio')?.addEventListener('click', (e) => {
       const isMuted = mobileAudio.toggleMute();
       e.currentTarget.textContent = isMuted ? '🔇' : '🔊';
     });
 
-    // Modal pause button
-    document.getElementById('btnPauseGame')?.addEventListener('click', () => {
-      this.togglePause();
-    });
-
-    // Pause Dialog buttons
     document.getElementById('btnResumeGame')?.addEventListener('click', () => {
       mobileAudio.tap();
       this.togglePause(false);
@@ -394,58 +405,16 @@ class MobileApp {
       this.exitActiveGame();
     });
 
-    // Fullscreen toggle button
-    document.getElementById('btnFullscreenGame')?.addEventListener('click', () => {
-      mobileAudio.click();
-      this.toggleFullscreen();
-    });
-
-    // Play again button (Game Over)
     document.getElementById('btnPlayAgain')?.addEventListener('click', () => {
       mobileAudio.tap();
       this.restartActiveGame();
     });
 
-    // Exit from game over
     document.getElementById('btnExitFromOver')?.addEventListener('click', () => {
       mobileAudio.tap();
       this.exitActiveGame();
     });
 
-    // Global Key Listener for Pause (Esc or P)
-    window.addEventListener('keydown', (e) => {
-      if (this.playerModal.classList.contains('active')) {
-        if (e.key === 'Escape' || e.key === 'p' || e.key === 'P') {
-          if (!this.gameOverDialog.classList.contains('hidden')) {
-            this.exitActiveGame();
-          } else {
-            this.togglePause();
-          }
-        }
-      }
-    });
-
-    // Bottom navigation bar
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        mobileAudio.tap();
-        navItems.forEach(n => n.classList.remove('active'));
-        item.classList.add('active');
-        const view = item.dataset.view;
-
-        if (view === 'favorites') {
-          this.currentCategory = 'favorites';
-        } else if (view === 'top') {
-          this.currentCategory = 'top';
-        } else {
-          this.currentCategory = 'all';
-        }
-        this.renderGameList();
-      });
-    });
-
-    // Window resize handler for mobile rotation & viewport changes
     window.addEventListener('resize', () => {
       if (this.activeGameInstance) {
         this.resizePlayerCanvas();
@@ -453,67 +422,44 @@ class MobileApp {
     });
   }
 
+  selectCategory(catKey) {
+    const pills = document.querySelectorAll('.category-pill');
+    pills.forEach(p => {
+      p.classList.toggle('active', p.dataset.cat === catKey);
+    });
+    this.currentCategory = catKey;
+    this.updateSectionHeading(catKey);
+    this.renderGameList();
+  }
+
+  updateSectionHeading(catKey) {
+    const headings = {
+      all: { title: 'ALL GAMES', sub: '15 Handcrafted Arcade Titles' },
+      top: { title: 'TOP PLAYED', sub: 'Most popular high-octane games' },
+      arcade: { title: 'ARCADE CLASSICS', sub: 'Classic 80s & 90s arcade action' },
+      puzzle: { title: 'PUZZLE & LOGIC', sub: 'Challenge your mind & strategy' },
+      reflex: { title: 'REFLEX & ACTION', sub: 'Test your reaction speed & timing' },
+      sports: { title: 'SPORTS & PHYSICS', sub: 'Play with physical momentum' },
+      racing: { title: 'RACING & SPEED', sub: 'Turbo boost highway navigation' },
+      favorites: { title: 'YOUR FAVORITES', sub: 'Saved games ready for instant play' }
+    };
+    const info = headings[catKey] || headings.all;
+    if (this.sectionTitleEl) this.sectionTitleEl.textContent = info.title;
+    if (this.sectionSubtextEl) this.sectionSubtextEl.textContent = info.sub;
+  }
+
   launchRandomGame() {
     mobileAudio.whoosh();
     const randomIndex = Math.floor(Math.random() * MOBILE_GAMES.length);
     const chosenGame = MOBILE_GAMES[randomIndex];
-
     if (navigator.vibrate) navigator.vibrate([20, 40, 20]);
     this.launchGame(chosenGame);
-  }
-
-  togglePause(forceState = null) {
-    if (!this.activeGameInstance) return;
-    mobileAudio.tap();
-    this.isPaused = forceState !== null ? forceState : !this.isPaused;
-
-    if (this.pauseDialog) {
-      this.pauseDialog.classList.toggle('hidden', !this.isPaused);
-    }
-
-    if (!this.isPaused) {
-      this.lastLoopTime = performance.now();
-    }
-  }
-
-  toggleFullscreen() {
-    if (!document.fullscreenElement) {
-      this.playerModal.requestFullscreen().catch(() => {});
-    } else {
-      document.exitFullscreen().catch(() => {});
-    }
-    setTimeout(() => this.resizePlayerCanvas(), 100);
-  }
-
-  resizePlayerCanvas() {
-    if (!this.playerCanvas) return;
-    const wrap = document.getElementById('canvasWrap');
-    if (!wrap) return;
-
-    // Available size inside canvas wrap area accounting for padding
-    const availW = Math.max(260, wrap.clientWidth - 16);
-    const availH = Math.max(320, wrap.clientHeight - 48);
-
-    // Maintain strict 2:3 aspect ratio (400w x 600h)
-    const scale = Math.min(availW / 400, availH / 600, 1.05);
-    const displayW = Math.floor(400 * scale);
-    const displayH = Math.floor(600 * scale);
-
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    this.playerCanvas.width = 400 * dpr;
-    this.playerCanvas.height = 600 * dpr;
-    this.playerCanvas.style.width = `${displayW}px`;
-    this.playerCanvas.style.height = `${displayH}px`;
-
-    const ctx = this.playerCanvas.getContext('2d');
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.scale(dpr, dpr);
   }
 
   renderGameList() {
     let list = [...MOBILE_GAMES];
 
-    // Filter by bottom bar / category
+    // Filter by Category
     if (this.currentCategory === 'favorites') {
       const favs = mobileStorage.getFavorites();
       list = list.filter(g => favs.includes(g.id));
@@ -523,34 +469,26 @@ class MobileApp {
       list = list.filter(g => g.category === this.currentCategory);
     }
 
-    // Filter by search
+    // Filter by Search Query
     if (this.searchQuery) {
       list = list.filter(g =>
         g.title.toLowerCase().includes(this.searchQuery) ||
+        g.fullName.toLowerCase().includes(this.searchQuery) ||
         g.desc.toLowerCase().includes(this.searchQuery) ||
         g.categoryName.toLowerCase().includes(this.searchQuery)
       );
     }
 
-    // Apply Sorting
-    if (this.currentSort === 'top') {
-      list.sort((a, b) => mobileStorage.getHighScore(b.id) - mobileStorage.getHighScore(a.id));
-    } else if (this.currentSort === 'az') {
-      list.sort((a, b) => a.title.localeCompare(b.title));
-    }
-
-    // Update section counter
-    const counterBadge = document.getElementById('gamesCountBadge');
-    if (counterBadge) {
-      counterBadge.textContent = `${list.length} Game${list.length === 1 ? '' : 's'}`;
+    if (this.gamesCountBadge) {
+      this.gamesCountBadge.textContent = list.length.toString();
     }
 
     if (list.length === 0) {
       this.gridEl.innerHTML = `
         <div class="empty-state">
-          <div style="font-size: 2.8rem; margin-bottom: 8px;">🔍</div>
-          <h3 style="font-weight: 700; color: #1E293B;">No matching games</h3>
-          <p style="color: #64748B; font-size: 0.9rem; margin-top: 4px;">Try searching for a different keyword or choose another category.</p>
+          <div style="font-size: 2.4rem; margin-bottom: 6px;">🔍</div>
+          <h3>NO GAMES FOUND</h3>
+          <p>Try searching another title or select "All".</p>
         </div>
       `;
       return;
@@ -563,43 +501,31 @@ class MobileApp {
       const svgArt = GAME_ARTWORK[game.id] || `<span style="font-size: 2rem;">${game.icon}</span>`;
 
       const card = document.createElement('div');
-      card.className = 'mobile-game-card';
+      card.className = 'game-card-2col';
       card.innerHTML = `
-        <div class="card-art-box" style="background: ${game.bg};">
+        <div class="card-thumb-frame">
+          <span class="card-badge-pill" style="background: ${game.color};">${game.badge}</span>
           ${svgArt}
+          <button class="card-fav-btn ${isFav ? 'is-fav' : ''}" data-id="${game.id}" title="Favorite">
+            ${isFav ? '❤️' : '🤍'}
+          </button>
         </div>
-        <div class="card-info">
-          <div class="card-header-row">
-            <span class="card-title">${game.title}</span>
-            <div class="card-header-actions">
-              <span class="card-badge" style="background: ${game.bg}; color: ${game.color};">${game.badge}</span>
-              <button class="btn-card-fav ${isFav ? 'is-fav' : ''}" title="Favorite" data-id="${game.id}">
-                ${isFav ? '❤️' : '🤍'}
-              </button>
-            </div>
-          </div>
-          <p class="card-desc">${game.desc}</p>
-          <div class="card-meta-chips">
-            <span class="meta-chip">⏱️ 1-2 min</span>
-            <span class="meta-chip">★ 4.9</span>
-            <span class="meta-chip" style="color: ${game.color}; font-weight: 800;">${game.categoryName}</span>
-          </div>
-          <div class="card-footer-row">
-            <span class="card-score">Best: <strong>${highScore}</strong></span>
-            <button class="card-play-btn" style="background: ${game.color};">PLAY ▶</button>
+        <div class="card-text-block">
+          <span class="card-name">${game.title}</span>
+          <div class="card-meta-row">
+            <span class="card-cat-label" style="color: ${game.color};">${game.category.toUpperCase()}</span>
+            <span class="card-score-label">BEST: <strong>${highScore}</strong></span>
           </div>
         </div>
       `;
 
-      // Handle card click to launch game
       card.addEventListener('click', () => {
         mobileAudio.tap();
         if (navigator.vibrate) navigator.vibrate(15);
         this.launchGame(game);
       });
 
-      // Handle heart favorite click without launching
-      const favBtn = card.querySelector('.btn-card-fav');
+      const favBtn = card.querySelector('.card-fav-btn');
       if (favBtn) {
         favBtn.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -618,8 +544,8 @@ class MobileApp {
     });
   }
 
-  launchGame(game, showAnimation = true) {
-    // Stop any existing game loop
+  launchGame(game) {
+    // Stop any existing game instance
     if (this.activeGameLoop) {
       cancelAnimationFrame(this.activeGameLoop);
       this.activeGameLoop = null;
@@ -640,34 +566,17 @@ class MobileApp {
     this.gameOverDialog.classList.add('hidden');
     if (this.pauseDialog) this.pauseDialog.classList.add('hidden');
 
-    // Update controls guide text
-    if (this.controlsHelperText) {
-      this.controlsHelperText.textContent = game.controls || 'Tap or click to play!';
-    }
-
-    // Show modal with slide-up
-    this.playerModal.classList.add('active');
+    // Add in-game class to body to hide navigation and block scroll
+    document.body.classList.add('in-game');
     document.body.style.overflow = 'hidden';
+    this.playerModal.classList.add('active');
 
     mobileStorage.recordPlay(game.id);
-    if (this.totalPlaysEl) {
-      this.totalPlaysEl.textContent = mobileStorage.getTotalPlayed();
-    }
 
-    // Setup canvas with 100% responsive aspect ratio fitting
-    this.resizePlayerCanvas();
+    // Setup Dedicated Touch Controls
+    this.setupTouchControls(game);
 
-    if (showAnimation) {
-      snakeTransition.play(game, () => {
-        this.startActiveGameSession(game);
-      });
-    } else {
-      this.startActiveGameSession(game);
-    }
-  }
-
-  startActiveGameSession(game) {
-    if (!this.playerModal.classList.contains('active')) return;
+    // Resize canvas to fit viewport perfectly
     this.resizePlayerCanvas();
 
     // Instantiate game
@@ -690,7 +599,7 @@ class MobileApp {
 
     this.activeGameInstance.start();
 
-    // Start 60 FPS Game Loop
+    // Start 60 FPS Loop
     this.lastLoopTime = performance.now();
     const tick = (now) => {
       const dt = Math.min(0.1, (now - this.lastLoopTime) / 1000);
@@ -711,13 +620,151 @@ class MobileApp {
     this.activeGameLoop = requestAnimationFrame(tick);
   }
 
+  setupTouchControls(game) {
+    if (!this.touchControlsEl) return;
+    this.touchControlsEl.innerHTML = '';
+
+    const triggerKey = (key, code) => {
+      window.dispatchEvent(new KeyboardEvent('keydown', { key, code, bubbles: true }));
+      if (navigator.vibrate) navigator.vibrate(10);
+    };
+
+    if (game.controlsType === 'dpad') {
+      // Virtual D-pad for Snake / 2048
+      const dpad = document.createElement('div');
+      dpad.className = 'touch-dpad-layout';
+      dpad.innerHTML = `
+        <div></div>
+        <button class="touch-btn" data-key="ArrowUp" title="Up">▲</button>
+        <div></div>
+        <button class="touch-btn" data-key="ArrowLeft" title="Left">◀</button>
+        <button class="touch-btn" data-key="ArrowDown" title="Down">▼</button>
+        <button class="touch-btn" data-key="ArrowRight" title="Right">▶</button>
+      `;
+      dpad.querySelectorAll('.touch-btn').forEach(btn => {
+        const key = btn.dataset.key;
+        btn.addEventListener('pointerdown', (e) => {
+          e.preventDefault();
+          triggerKey(key, key);
+        });
+      });
+      this.touchControlsEl.appendChild(dpad);
+    } else if (game.controlsType === 'racing') {
+      // Racing Left / Right Steer + Turbo Boost
+      const bar = document.createElement('div');
+      bar.className = 'touch-action-bar';
+      bar.innerHTML = `
+        <button class="touch-action-btn" id="ctrlLeft">◀ STEER LEFT</button>
+        <button class="touch-action-btn" id="ctrlBoost" style="border-color: #FF007A; color: #FF007A;">⚡ NITRO</button>
+        <button class="touch-action-btn" id="ctrlRight">STEER RIGHT ▶</button>
+      `;
+      bar.querySelector('#ctrlLeft').addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        triggerKey('ArrowLeft', 'ArrowLeft');
+      });
+      bar.querySelector('#ctrlRight').addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        triggerKey('ArrowRight', 'ArrowRight');
+      });
+      bar.querySelector('#ctrlBoost').addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        triggerKey('ArrowUp', 'ArrowUp');
+      });
+      this.touchControlsEl.appendChild(bar);
+    } else if (game.controlsType === 'shooter') {
+      // Space Shooter Left / Right + Fire
+      const bar = document.createElement('div');
+      bar.className = 'touch-action-bar';
+      bar.innerHTML = `
+        <button class="touch-action-btn" id="ctrlShootLeft">◀ LEFT</button>
+        <button class="touch-action-btn" id="ctrlShootFire" style="border-color: #FFD700; color: #FFD700;">🔥 FIRE</button>
+        <button class="touch-action-btn" id="ctrlShootRight">RIGHT ▶</button>
+      `;
+      bar.querySelector('#ctrlShootLeft').addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        triggerKey('ArrowLeft', 'ArrowLeft');
+      });
+      bar.querySelector('#ctrlShootRight').addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        triggerKey('ArrowRight', 'ArrowRight');
+      });
+      bar.querySelector('#ctrlShootFire').addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        triggerKey(' ', 'Space');
+      });
+      this.touchControlsEl.appendChild(bar);
+    } else {
+      // Large Tap Area (Blade Dash, Flappy, Stack 3D, Whack-a-Mole, Bounce)
+      const bar = document.createElement('div');
+      bar.className = 'touch-action-bar';
+      bar.innerHTML = `
+        <button class="touch-action-btn" id="ctrlPrimaryAction" style="border-color: #00F2FE;">
+          <span>⚡ TAP TO ACTION / JUMP</span>
+        </button>
+      `;
+      const btn = bar.querySelector('#ctrlPrimaryAction');
+      btn.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        triggerKey(' ', 'Space');
+        if (this.playerCanvas) {
+          const rect = this.playerCanvas.getBoundingClientRect();
+          const evt = new PointerEvent('pointerdown', {
+            clientX: rect.left + rect.width / 2,
+            clientY: rect.top + rect.height / 2,
+            bubbles: true
+          });
+          this.playerCanvas.dispatchEvent(evt);
+        }
+      });
+      this.touchControlsEl.appendChild(bar);
+    }
+  }
+
+  resizePlayerCanvas() {
+    if (!this.playerCanvas) return;
+    const wrap = document.getElementById('canvasWrap');
+    if (!wrap) return;
+
+    // Available space accounting for top HUD (50px) and bottom touch controls (100px)
+    const availW = Math.max(260, wrap.clientWidth - 16);
+    const availH = Math.max(300, wrap.clientHeight - 16);
+
+    // Maintain 2:3 aspect ratio (400w x 600h)
+    const scale = Math.min(availW / 400, availH / 600, 1.05);
+    const displayW = Math.floor(400 * scale);
+    const displayH = Math.floor(600 * scale);
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    this.playerCanvas.width = 400 * dpr;
+    this.playerCanvas.height = 600 * dpr;
+    this.playerCanvas.style.width = `${displayW}px`;
+    this.playerCanvas.style.height = `${displayH}px`;
+
+    const ctx = this.playerCanvas.getContext('2d');
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+  }
+
+  togglePause(forceState = null) {
+    if (!this.activeGameInstance) return;
+    mobileAudio.tap();
+    this.isPaused = forceState !== null ? forceState : !this.isPaused;
+
+    if (this.pauseDialog) {
+      this.pauseDialog.classList.toggle('hidden', !this.isPaused);
+    }
+    if (!this.isPaused) {
+      this.lastLoopTime = performance.now();
+    }
+  }
+
   showGameOver(score, isNewBest) {
     this.dialogFinalScore.textContent = score.toString();
     this.dialogBestScore.textContent = mobileStorage.getHighScore(this.currentGame.id).toString();
 
     const banner = document.getElementById('newBestBanner');
     if (banner) {
-      banner.style.display = isNewBest ? 'block' : 'none';
+      banner.classList.toggle('hidden', !isNewBest);
     }
 
     if (isNewBest) {
@@ -734,13 +781,11 @@ class MobileApp {
     this.gameOverDialog.classList.add('hidden');
     if (this.pauseDialog) this.pauseDialog.classList.add('hidden');
     if (this.currentGame) {
-      this.launchGame(this.currentGame, true);
+      this.launchGame(this.currentGame);
     }
   }
 
   exitActiveGame() {
-    snakeTransition.finishEarly();
-
     if (this.activeGameLoop) {
       cancelAnimationFrame(this.activeGameLoop);
       this.activeGameLoop = null;
@@ -752,8 +797,9 @@ class MobileApp {
       this.activeGameInstance = null;
     }
 
-    this.playerModal.classList.remove('active');
+    document.body.classList.remove('in-game');
     document.body.style.overflow = '';
+    this.playerModal.classList.remove('active');
     this.renderGameList();
   }
 }
