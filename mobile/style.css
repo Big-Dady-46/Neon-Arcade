@@ -387,42 +387,88 @@ body.mobile-body {
 }
 
 /* ==========================================================================
-   MOBILE HERO (Height: 220–280px, Retro Grid Boxes & Cyber Green Highlight)
+   ARCADE LIVE TICKER STRIP
+   ========================================================================== */
+.mobile-ticker-strip {
+  padding: 4px 14px 6px;
+  width: 100%;
+}
+.ticker-pill {
+  background: rgba(18, 22, 36, 0.85);
+  border: 1px solid rgba(0, 255, 136, 0.25);
+  border-radius: var(--radius-full);
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+.ticker-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00FF88;
+  box-shadow: 0 0 8px #00FF88;
+  animation: liveBlink 1.4s infinite;
+  flex-shrink: 0;
+}
+.ticker-text {
+  font-family: var(--font-heading);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #A7ADBF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+   MOBILE HERO (Height: 220–280px, Live Canvas & Retro Grid Boxes)
    ========================================================================== */
 .mobile-hero-section {
-  padding: 8px 14px 14px;
+  padding: 6px 14px 14px;
   width: 100%;
 }
 
 .mobile-hero-card {
   height: 236px;
   border-radius: var(--radius-xl);
-  /* Cyber grid boxes like desktop banner */
-  background-color: #141726;
-  background-image: 
-    linear-gradient(rgba(0, 242, 254, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 242, 254, 0.08) 1px, transparent 1px),
-    linear-gradient(145deg, #1A1F32 0%, #121524 100%);
-  background-size: 22px 22px, 22px 22px, 100% 100%;
-  border: 1px solid rgba(16, 185, 129, 0.4);
-  padding: 14px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  background-color: #121524;
+  border: 1px solid rgba(16, 185, 129, 0.45);
   position: relative;
   overflow: hidden;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.15);
 }
 
-.mobile-hero-card::before {
-  content: '';
+.hero-live-canvas {
   position: absolute;
-  right: -25px;
-  top: -25px;
-  width: 140px;
-  height: 140px;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.22) 0%, rgba(0, 242, 254, 0) 70%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
   pointer-events: none;
+}
+
+.hero-live-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(14, 18, 28, 0.35) 0%, rgba(14, 18, 28, 0.8) 65%, rgba(14, 18, 28, 0.95) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-card-inner {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  padding: 14px;
 }
 
 .hero-top-row {
@@ -689,7 +735,7 @@ body.mobile-body {
   box-shadow: 0 0 14px rgba(0, 255, 136, 0.35);
 }
 
-/* Card Artwork Frame (Aspect Ratio 16:10 / 4:3) */
+/* Card Artwork Frame (Aspect Ratio 16:10 with Arcade Gloss & Specular Shine) */
 .card-thumb-frame {
   width: 100%;
   aspect-ratio: 16 / 10;
@@ -701,34 +747,51 @@ body.mobile-body {
   position: relative;
   overflow: hidden;
   padding: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15);
+}
+.card-thumb-frame::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+  z-index: 1;
 }
 .card-thumb-frame svg {
   width: 100%;
   height: 100%;
   display: block;
+  position: relative;
+  z-index: 0;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.45));
 }
 
 .card-fav-btn {
   position: absolute;
   top: 5px;
   right: 5px;
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  background: rgba(15, 17, 26, 0.75);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 17, 26, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   font-size: 0.72rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 2;
-  transition: transform 0.15s ease;
+  z-index: 3;
+  transition: transform 0.15s ease, background 0.15s ease;
 }
 .card-fav-btn:active {
-  transform: scale(1.2);
+  transform: scale(1.25);
+  background: rgba(239, 68, 68, 0.25);
 }
 
 .card-badge-pill {
@@ -738,12 +801,12 @@ body.mobile-body {
   font-family: var(--font-heading);
   font-size: 0.56rem;
   font-weight: 800;
-  padding: 1px 6px;
+  padding: 2px 7px;
   border-radius: var(--radius-full);
   color: #FFFFFF;
-  letter-spacing: 0.03em;
-  background: rgba(0, 242, 254, 0.85);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.04em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  z-index: 3;
 }
 
 /* Card Text Info */

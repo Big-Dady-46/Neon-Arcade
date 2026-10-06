@@ -86,41 +86,54 @@
       <button class="category-pill" data-cat="favorites">❤️ Favorites</button>
     </nav>
 
-    <!-- Mobile Hero with Cyber Grid Boxes (Height: 220-280px) -->
+    <!-- Arcade Live Hype Ticker -->
+    <div class="mobile-ticker-strip">
+      <div class="ticker-pill">
+        <span class="ticker-dot"></span>
+        <span class="ticker-text">⚡ 15 RETRO ARCADE CLASSICS • 60 FPS • ZERO DOWNLOADS • INSTANT PLAY</span>
+      </div>
+    </div>
+
+    <!-- Mobile Hero with Live 60 FPS Cyber Grid Canvas (Height: 220-280px) -->
     <section class="mobile-hero-section">
       <div class="mobile-hero-card" id="mobileHeroCard">
-        <div class="hero-top-row">
-          <div class="hero-tag-badge">
-            <span class="hero-live-dot"></span>
-            <span id="heroBadgeText">FEATURED OF THE DAY</span>
-          </div>
-          <div class="hero-dots" id="heroDots">
-            <span class="hero-dot active" data-idx="0"></span>
-            <span class="hero-dot" data-idx="1"></span>
-            <span class="hero-dot" data-idx="2"></span>
-          </div>
-        </div>
+        <!-- Live Retro Cyber Canvas Animation (Neon Snake + Grid Boxes) -->
+        <canvas class="hero-live-canvas" id="heroLiveCanvas"></canvas>
+        <div class="hero-live-vignette"></div>
 
-        <div class="hero-body-content">
-          <div class="hero-artwork-frame" id="heroArtworkFrame">
-            <!-- Rendered with high-res SVG art -->
-          </div>
-          <div class="hero-text-details">
-            <span class="hero-category-tag" id="heroCategoryTag">ACTION & TIMING</span>
-            <h1 class="hero-title" id="heroTitle">Blade Dash</h1>
-            <p class="hero-desc" id="heroDesc">Fling steel daggers into spinning targets with pure adrenaline.</p>
-            <div class="hero-chips-row">
-              <span class="hero-chip chip-green">⚡ 60 FPS</span>
-              <span class="hero-chip chip-yellow" id="heroBestChip">🏆 BEST: <strong id="heroBestVal">0</strong></span>
-              <span class="hero-chip chip-red">🔥 HOT</span>
-              <span class="hero-chip chip-blue">🕹️ PRO</span>
+        <div class="hero-card-inner">
+          <div class="hero-top-row">
+            <div class="hero-tag-badge">
+              <span class="hero-live-dot"></span>
+              <span id="heroBadgeText">🔥 #1 TRENDING ARCADE</span>
+            </div>
+            <div class="hero-dots" id="heroDots">
+              <span class="hero-dot active" data-idx="0"></span>
+              <span class="hero-dot" data-idx="1"></span>
+              <span class="hero-dot" data-idx="2"></span>
             </div>
           </div>
-        </div>
 
-        <button class="hero-play-btn" id="btnHeroPlay">
-          <span>PLAY NOW</span> <span class="play-arrow">▶</span>
-        </button>
+          <div class="hero-body-content">
+            <div class="hero-artwork-frame" id="heroArtworkFrame">
+              <!-- Rendered with high-res SVG art -->
+            </div>
+            <div class="hero-text-details">
+              <span class="hero-category-tag" id="heroCategoryTag">ACTION & TIMING</span>
+              <h1 class="hero-title" id="heroTitle">Cyber Snake</h1>
+              <p class="hero-desc" id="heroDesc">Steer the glowing neon serpent, devour energy apples, and shatter records.</p>
+              <div class="hero-chips-row">
+                <span class="hero-chip chip-green">⚡ 60 FPS ULTRA</span>
+                <span class="hero-chip chip-yellow" id="heroBestChip">🏆 BEST: <strong id="heroBestVal">0</strong></span>
+                <span class="hero-chip chip-red">🔥 HOT</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="hero-play-btn" id="btnHeroPlay">
+            <span>PLAY NOW - INSTANT</span> <span class="play-arrow">▶</span>
+          </button>
+        </div>
       </div>
     </section>
 

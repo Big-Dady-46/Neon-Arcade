@@ -244,6 +244,7 @@ class MobileApp {
     this.bindEvents();
     this.renderHero(0);
     this.startHeroCarousel();
+    this.startHeroCanvasAnimation();
     this.renderGameList();
   }
 
@@ -288,7 +289,7 @@ class MobileApp {
       tagEl.style.color = feat.color;
     }
     if (badgeTextEl) {
-      badgeTextEl.textContent = this.heroIdx === 0 ? 'FEATURED OF THE DAY' : (this.heroIdx === 1 ? 'TOP SPEED RUN' : 'CYBER CLASSIC');
+      badgeTextEl.textContent = this.heroIdx === 0 ? '🔥 #1 TRENDING ARCADE' : (this.heroIdx === 1 ? '⚡ SPEED DEMON' : '👾 CYBER CLASSIC');
     }
     if (bestValEl) {
       bestValEl.textContent = mobileStorage.getHighScore(feat.id);
@@ -318,6 +319,98 @@ class MobileApp {
         this.renderHero(this.heroIdx);
       }
     }, 6000);
+  }
+
+  startHeroCanvasAnimation() {
+    const canvas = document.getElementById('heroLiveCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let t = 0;
+
+    const resize = () => {
+      const card = canvas.parentElement;
+      if (!card) return;
+      const w = card.clientWidth || 360;
+      const h = card.clientHeight || 236;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+    };
+
+    resize();
+    window.addEventListener('resize', resize);
+
+    const render = () => {
+      // Pause drawing if player modal is active or tab hidden to preserve 60fps & battery
+      if (this.activeGameInstance || document.hidden) {
+        requestAnimationFrame(render);
+        return;
+      }
+
+      t += 0.035;
+      const card = canvas.parentElement;
+      const w = card ? card.clientWidth : 360;
+      const h = card ? card.clientHeight : 236;
+
+      // Dark space background
+      ctx.fillStyle = '#0F121E';
+      ctx.fillRect(0, 0, w, h);
+
+      // Retro Cyber Grid Boxes
+      ctx.strokeStyle = 'rgba(0, 242, 254, 0.08)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x < w; x += 22) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, h);
+        ctx.stroke();
+      }
+      for (let y = 0; y < h; y += 22) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+        ctx.stroke();
+      }
+
+      // Winding Glowing Cyber Snake
+      const cx = w * 0.72;
+      const cy = h * 0.44;
+      const segments = 16;
+
+      ctx.save();
+      for (let i = 0; i < segments; i++) {
+        const sx = cx + Math.sin(t - i * 0.19) * (w * 0.25);
+        const sy = cy + Math.cos((t - i * 0.19) * 0.85) * (h * 0.26);
+
+        const isHead = i === 0;
+        ctx.fillStyle = isHead ? '#00FF88' : `rgba(0, 242, 254, ${1 - i / segments})`;
+        ctx.shadowColor = isHead ? '#00FF88' : '#00F2FE';
+        ctx.shadowBlur = isHead ? 14 : 6;
+
+        ctx.beginPath();
+        ctx.arc(sx, sy, isHead ? 8.5 : 5.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Pulsing golden energy apple
+      const fx = cx + Math.sin(t * 0.5) * 35;
+      const fy = cy + Math.cos(t * 0.5) * 20;
+      ctx.fillStyle = '#FFD700';
+      ctx.shadowColor = '#FFD700';
+      ctx.shadowBlur = 14;
+      ctx.beginPath();
+      ctx.arc(fx, fy, 7 + Math.sin(t * 3.5) * 1.8, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+      requestAnimationFrame(render);
+    };
+
+    requestAnimationFrame(render);
   }
 
   bindEvents() {
