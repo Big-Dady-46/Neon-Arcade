@@ -51,8 +51,12 @@ export class SnakeGame {
 
     this.spawnFood();
 
+    this.handleTouchMove = (e) => { e.preventDefault(); };
     this.canvas.addEventListener('touchstart', this.handleTouchStart, { passive: false });
+    this.canvas.addEventListener('touchmove', this.handleTouchMove, { passive: false });
     this.canvas.addEventListener('touchend', this.handleTouchEnd, { passive: false });
+    this.canvas.addEventListener('pointerdown', this.handleTouchStart);
+    this.canvas.addEventListener('pointerup', this.handleTouchEnd);
     window.addEventListener('keydown', this.handleKeyDown);
   }
 
@@ -69,15 +73,20 @@ export class SnakeGame {
     if (e.touches && e.touches.length > 0) {
       this.touchStart.x = e.touches[0].clientX;
       this.touchStart.y = e.touches[0].clientY;
+    } else if (e.clientX !== undefined) {
+      this.touchStart.x = e.clientX;
+      this.touchStart.y = e.clientY;
     }
   }
 
   handleTouchEnd(e) {
-    if (e.changedTouches && e.changedTouches.length > 0) {
-      const dx = e.changedTouches[0].clientX - this.touchStart.x;
-      const dy = e.changedTouches[0].clientY - this.touchStart.y;
+    const clientX = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : e.clientX;
+    const clientY = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientY : e.clientY;
+    if (clientX !== undefined && clientY !== undefined) {
+      const dx = clientX - this.touchStart.x;
+      const dy = clientY - this.touchStart.y;
 
-      if (Math.abs(dx) > 20 || Math.abs(dy) > 20) {
+      if (Math.abs(dx) > 16 || Math.abs(dy) > 16) {
         if (Math.abs(dx) > Math.abs(dy)) {
           if (dx > 0 && this.dir.x === 0) this.nextDir = { x: 1, y: 0 };
           else if (dx < 0 && this.dir.x === 0) this.nextDir = { x: -1, y: 0 };
@@ -263,7 +272,10 @@ export class SnakeGame {
 
   destroy() {
     this.canvas.removeEventListener('touchstart', this.handleTouchStart);
+    if (this.handleTouchMove) this.canvas.removeEventListener('touchmove', this.handleTouchMove);
     this.canvas.removeEventListener('touchend', this.handleTouchEnd);
+    this.canvas.removeEventListener('pointerdown', this.handleTouchStart);
+    this.canvas.removeEventListener('pointerup', this.handleTouchEnd);
     window.removeEventListener('keydown', this.handleKeyDown);
     this.particles = [];
   }

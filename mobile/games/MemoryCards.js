@@ -60,13 +60,20 @@ export class MemoryCardsMobile {
     }));
 
     this.canvas.addEventListener('pointerdown', this.handleTap);
+    this.canvas.addEventListener('touchstart', (e) => {
+      if (e.cancelable) e.preventDefault();
+      this.handleTap(e);
+    }, { passive: false });
   }
 
   handleTap(e) {
     if (this.isLock || this.isOver) return;
     const rect = this.canvas.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * this.width;
-    const y = ((e.clientY - rect.top) / rect.height) * this.height;
+    const clientX = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
+    const clientY = (e.touches && e.touches[0]) ? e.touches[0].clientY : e.clientY;
+    if (clientX === undefined || clientY === undefined) return;
+    const x = ((clientX - rect.left) / rect.width) * this.width;
+    const y = ((clientY - rect.top) / rect.height) * this.height;
 
     const cardW = 76;
     const cardH = 88;

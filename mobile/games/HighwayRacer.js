@@ -54,20 +54,28 @@ export class HighwayRacerMobile {
     this.spawnTimer = 0;
 
     this.canvas.addEventListener('pointerdown', this.handleTap);
+    this.canvas.addEventListener('touchstart', (e) => {
+      if (e.cancelable) e.preventDefault();
+      this.handleTap(e);
+    }, { passive: false });
     window.addEventListener('keydown', this.handleKeyDown);
   }
 
   handleTap(e) {
     if (this.isOver) return;
     const rect = this.canvas.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * this.width;
+    const clientX = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
+    if (clientX === undefined) return;
+    const x = ((clientX - rect.left) / rect.width) * this.width;
 
-    if (x < this.player.x - 20 && this.player.lane > 0) {
+    if (x < this.player.x - 10 && this.player.lane > 0) {
       this.player.lane--;
       this.audio.slice();
-    } else if (x > this.player.x + 20 && this.player.lane < 2) {
+      if (navigator.vibrate) navigator.vibrate(12);
+    } else if (x > this.player.x + 10 && this.player.lane < 2) {
       this.player.lane++;
       this.audio.slice();
+      if (navigator.vibrate) navigator.vibrate(12);
     }
   }
 
@@ -278,6 +286,7 @@ export class HighwayRacerMobile {
 
   destroy() {
     this.canvas.removeEventListener('pointerdown', this.handleTap);
+    if (this.touchStartHandler) this.canvas.removeEventListener('touchstart', this.touchStartHandler);
     window.removeEventListener('keydown', this.handleKeyDown);
     this.particles = [];
   }

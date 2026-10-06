@@ -42,12 +42,19 @@ export class SpaceShooterMobile {
     this.enemies = [];
     this.particles = [];
 
-    this.canvas.addEventListener('pointermove', this.handleMove);
-    this.canvas.addEventListener('touchmove', (e) => {
+    this.touchHandler = (e) => {
+      e.preventDefault();
       if (e.touches && e.touches.length > 0) {
         this.handleMove(e.touches[0]);
       }
-    }, { passive: false });
+    };
+    this.canvas.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      this.handleMove(e);
+    });
+    this.canvas.addEventListener('pointermove', this.handleMove);
+    this.canvas.addEventListener('touchstart', this.touchHandler, { passive: false });
+    this.canvas.addEventListener('touchmove', this.touchHandler, { passive: false });
   }
 
   handleMove(e) {
@@ -232,6 +239,10 @@ export class SpaceShooterMobile {
 
   destroy() {
     this.canvas.removeEventListener('pointermove', this.handleMove);
+    if (this.touchHandler) {
+      this.canvas.removeEventListener('touchstart', this.touchHandler);
+      this.canvas.removeEventListener('touchmove', this.touchHandler);
+    }
     this.particles = [];
   }
 }

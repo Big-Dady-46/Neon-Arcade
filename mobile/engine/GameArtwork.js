@@ -153,21 +153,26 @@ export const GAME_ARTWORK = {
     <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <radialGradient id="dsBall" cx="35%" cy="35%" r="65%">
-          <stop offset="0%" stop-color="#FB923C"/>
-          <stop offset="60%" stop-color="#EA580C"/>
-          <stop offset="100%" stop-color="#9A3412"/>
+          <stop offset="0%" stop-color="#FFD700"/>
+          <stop offset="40%" stop-color="#FF5500"/>
+          <stop offset="100%" stop-color="#880000"/>
         </radialGradient>
+        <filter id="dsGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="#FF5500" flood-opacity="0.8"/>
+        </filter>
       </defs>
-      <!-- Hoop Rim & Net -->
-      <ellipse cx="54" cy="44" rx="14" ry="4" stroke="#EF4444" stroke-width="3" fill="none"/>
-      <path d="M41 44 L46 64 L54 66 L62 64 L67 44" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="2 2" fill="none"/>
-      <!-- Parabolic Aim Trajectory -->
-      <path d="M18 58 Q34 20 48 34" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="3 3" fill="none"/>
-      <!-- Basketball -->
-      <circle cx="22" cy="50" r="10" fill="url(#dsBall)"/>
-      <circle cx="22" cy="50" r="10" stroke="#7C2D12" stroke-width="1.2" fill="none"/>
-      <path d="M12 50 C18 48 26 48 32 50" stroke="#7C2D12" stroke-width="1"/>
-      <path d="M22 40 C20 46 20 54 22 60" stroke="#7C2D12" stroke-width="1"/>
+      <!-- Backboard Plate -->
+      <rect x="64" y="24" width="4" height="26" rx="2" fill="#00F2FE"/>
+      <!-- Glowing Rim & Chain Net -->
+      <ellipse cx="52" cy="38" rx="14" ry="4.5" stroke="#FF5500" stroke-width="3" filter="url(#dsGlow)"/>
+      <path d="M39 38 L45 56 L52 58 L59 56 L65 38" stroke="#00F2FE" stroke-width="1.8" stroke-dasharray="2 2" fill="none" opacity="0.9"/>
+      <!-- Glowing Laser Trajectory Arc -->
+      <path d="M16 62 Q32 14 48 30" stroke="#00F2FE" stroke-width="2.5" stroke-dasharray="3 3" opacity="0.85"/>
+      <!-- Magma Basketball -->
+      <circle cx="20" cy="54" r="11" fill="url(#dsBall)" filter="url(#dsGlow)"/>
+      <circle cx="20" cy="54" r="11" stroke="#220500" stroke-width="1.2" fill="none"/>
+      <path d="M9 54 C16 52 24 52 31 54" stroke="#220500" stroke-width="1.1"/>
+      <path d="M20 43 C18 49 18 59 20 65" stroke="#220500" stroke-width="1.1"/>
     </svg>
   `,
 

@@ -726,10 +726,10 @@ class MobileApp {
       card.className = 'game-card-2col';
       card.innerHTML = `
         <div class="card-thumb-frame" style="background: radial-gradient(circle at 50% 50%, ${game.color}28 0%, #121522 75%);">
-          <span class="card-badge-pill" style="background: ${game.color};">${game.badge}</span>
+          <span class="card-badge-pill" style="border-color: ${game.color}77; color: ${game.color}; text-shadow: 0 0 8px ${game.color}66;">${game.badge}</span>
           ${svgArt}
           <button class="card-fav-btn ${isFav ? 'is-fav' : ''}" data-id="${game.id}" title="Favorite">
-            ${isFav ? '❤️' : '🤍'}
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
           </button>
         </div>
         <div class="card-text-block">
@@ -757,7 +757,6 @@ class MobileApp {
           mobileAudio.pop();
           if (navigator.vibrate) navigator.vibrate(20);
           const nowFav = mobileStorage.toggleFavorite(game.id);
-          favBtn.textContent = nowFav ? '❤️' : '🤍';
           favBtn.classList.toggle('is-fav', nowFav);
           if (this.currentCategory === 'favorites' && !nowFav) {
             this.renderGameList();
@@ -1006,6 +1005,8 @@ class MobileApp {
   }
 
   restartActiveGame() {
+    if (this.gameOverDialog) this.gameOverDialog.classList.add('hidden');
+    if (this.pauseDialog) this.pauseDialog.classList.add('hidden');
     if (!this.currentGame) return;
     const game = this.currentGame;
     this.launchGame(game);
@@ -1025,16 +1026,21 @@ class MobileApp {
       if (navigator.vibrate) navigator.vibrate(80);
     }
 
+    const currentBest = Math.max(finalScore, mobileStorage.getHighScore(this.currentGame?.id || ''));
     if (this.dialogFinalScore) this.dialogFinalScore.textContent = finalScore.toString();
-    if (this.dialogBestScore) this.dialogBestScore.textContent = this.currentHighScore.toString();
+    if (this.dialogBestScore) this.dialogBestScore.textContent = currentBest.toString();
 
     const banner = document.getElementById('newBestBanner');
     if (banner) banner.classList.toggle('hidden', !isNewBest);
 
-    if (this.gameOverDialog) this.gameOverDialog.classList.remove('hidden');
+    if (this.gameOverDialog) {
+      this.gameOverDialog.classList.remove('hidden');
+    }
   }
 
   exitActiveGame() {
+    if (this.gameOverDialog) this.gameOverDialog.classList.add('hidden');
+    if (this.pauseDialog) this.pauseDialog.classList.add('hidden');
     if (this.activeGameLoop) {
       cancelAnimationFrame(this.activeGameLoop);
       this.activeGameLoop = null;

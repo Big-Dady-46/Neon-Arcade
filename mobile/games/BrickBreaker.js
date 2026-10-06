@@ -45,8 +45,20 @@ export class BrickBreakerMobile {
     this.resetBall();
     this.createBricks();
 
+    this.touchHandler = (e) => {
+      if (e.cancelable) e.preventDefault();
+      if (e.touches && e.touches.length > 0) {
+        this.handleMove(e.touches[0]);
+      }
+    };
     this.canvas.addEventListener('pointermove', this.handleMove);
     this.canvas.addEventListener('pointerdown', this.handleTap);
+    this.canvas.addEventListener('touchstart', (e) => {
+      if (e.cancelable) e.preventDefault();
+      this.handleTap();
+      if (e.touches && e.touches.length > 0) this.handleMove(e.touches[0]);
+    }, { passive: false });
+    this.canvas.addEventListener('touchmove', this.touchHandler, { passive: false });
     window.addEventListener('keydown', (e) => {
       if (e.code === 'ArrowLeft') this.paddle.x -= 25;
       if (e.code === 'ArrowRight') this.paddle.x += 25;
@@ -273,6 +285,10 @@ export class BrickBreakerMobile {
   destroy() {
     this.canvas.removeEventListener('pointermove', this.handleMove);
     this.canvas.removeEventListener('pointerdown', this.handleTap);
+    if (this.touchHandler) {
+      this.canvas.removeEventListener('touchstart', this.handleTap);
+      this.canvas.removeEventListener('touchmove', this.touchHandler);
+    }
     this.particles = [];
   }
 }

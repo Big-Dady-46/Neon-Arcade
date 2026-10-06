@@ -66,6 +66,10 @@ export class ZigZagGame {
     }
 
     this.canvas.addEventListener('pointerdown', this.handleTap);
+    this.canvas.addEventListener('touchstart', (e) => {
+      if (e.cancelable) e.preventDefault();
+      this.handleTap();
+    }, { passive: false });
     window.addEventListener('keydown', (e) => {
       if (e.code === 'Space' || e.code === 'ArrowUp') this.handleTap();
     });
