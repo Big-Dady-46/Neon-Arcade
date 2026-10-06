@@ -474,6 +474,7 @@ class MobileApp {
         mobileAudio.tap();
         pills.forEach(p => p.classList.remove('active'));
         pill.classList.add('active');
+        pill.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
         this.currentCategory = pill.dataset.cat;
         this.updateSectionHeading(this.currentCategory);
         this.renderGameList();
@@ -642,7 +643,11 @@ class MobileApp {
   selectCategory(catKey) {
     const pills = document.querySelectorAll('.category-pill');
     pills.forEach(p => {
-      p.classList.toggle('active', p.dataset.cat === catKey);
+      const isMatch = p.dataset.cat === catKey;
+      p.classList.toggle('active', isMatch);
+      if (isMatch) {
+        p.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
     });
     this.currentCategory = catKey;
     this.updateSectionHeading(catKey);

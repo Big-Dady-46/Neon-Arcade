@@ -94,22 +94,23 @@ body.mobile-body {
 }
 
 /* ==========================================================================
-   MOBILE HEADER (Sticky, Compact, Green Underline, Subtle Backdrop Blur)
+   MOBILE HEADER (Seamless Merged Header: Brand, Search & Masked Categories)
    ========================================================================== */
 .mobile-header {
   position: sticky;
   top: 0;
   z-index: 80;
-  background: var(--bg-surface-glass);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(16, 185, 129, 0.3);
-  padding: 10px 14px 10px;
+  background: rgba(10, 13, 20, 0.94);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 10px 0 6px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
   width: 100%;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 .mobile-header-top {
@@ -117,6 +118,7 @@ body.mobile-body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  padding: 0 14px;
 }
 
 .mobile-brand-link {
@@ -243,9 +245,10 @@ body.mobile-body {
 }
 
 /* Mobile Search Bar with Neon Green Focus & Icon */
+/* Mobile Search Bar with Neon Green Focus & Icon */
 .mobile-search-bar {
   position: relative;
-  width: 100%;
+  margin: 0 14px;
 }
 
 .search-lens-icon {
@@ -260,24 +263,25 @@ body.mobile-body {
 
 .mobile-search-field {
   width: 100%;
-  height: 38px;
+  height: 36px;
   padding: 0 34px 0 34px;
-  border-radius: var(--radius-md);
-  background: var(--bg-input);
-  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: var(--radius-full);
+  background: rgba(20, 24, 38, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--text-primary);
   font-family: var(--font-sans);
-  font-size: 0.82rem;
+  font-size: 0.81rem;
   font-weight: 600;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 .mobile-search-field::placeholder {
   color: var(--text-muted);
 }
 .mobile-search-field:focus {
+  background: rgba(22, 28, 45, 0.95);
   border-color: #00FF88;
-  box-shadow: 0 0 14px rgba(0, 255, 136, 0.35);
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.3);
 }
 
 .search-clear-btn {
@@ -302,17 +306,23 @@ body.mobile-body {
 }
 
 /* ==========================================================================
-   MOBILE CATEGORY BAR (Horizontal Swipe Pills with Red, Yellow, Green, Blue)
+   MOBILE CATEGORY BAR (Horizontal Swipe Pills with Left/Right Fading Mask)
    ========================================================================== */
 .mobile-category-bar {
   display: flex;
   align-items: center;
   gap: 7px;
   overflow-x: auto;
-  padding: 8px 14px 6px;
+  padding: 2px 14px 4px;
   scrollbar-width: none;
   width: 100%;
   flex-shrink: 0;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20px, black calc(100% - 20px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 20px, black calc(100% - 20px), transparent 100%);
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 .mobile-category-bar::-webkit-scrollbar {
   display: none;
@@ -320,13 +330,13 @@ body.mobile-body {
 
 .category-pill {
   flex-shrink: 0;
-  padding: 6px 14px;
+  padding: 5px 13px;
   border-radius: var(--radius-full);
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
+  background: rgba(22, 27, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--text-secondary);
   font-family: var(--font-sans);
-  font-size: 0.76rem;
+  font-size: 0.75rem;
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
@@ -384,44 +394,6 @@ body.mobile-body {
   border-color: #F43F5E;
   color: #FFFFFF;
   box-shadow: 0 0 14px rgba(244, 63, 94, 0.45);
-}
-
-/* ==========================================================================
-   ARCADE LIVE TICKER STRIP
-   ========================================================================== */
-.mobile-ticker-strip {
-  padding: 4px 14px 6px;
-  width: 100%;
-}
-.ticker-pill {
-  background: rgba(18, 22, 36, 0.85);
-  border: 1px solid rgba(0, 255, 136, 0.25);
-  border-radius: var(--radius-full);
-  padding: 4px 10px;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-.ticker-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #00FF88;
-  box-shadow: 0 0 8px #00FF88;
-  animation: liveBlink 1.4s infinite;
-  flex-shrink: 0;
-}
-.ticker-text {
-  font-family: var(--font-heading);
-  font-size: 0.58rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  color: #A7ADBF;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 /* ==========================================================================
@@ -1655,8 +1627,11 @@ body.in-game .mobile-bottom-nav,
 /* Ultra-Compact Phones (320px – 359px, e.g. iPhone SE 1st gen) */
 @media (max-width: 359px) {
   .mobile-header {
-    padding: max(8px, env(safe-area-inset-top, 8px)) 10px 8px;
-    gap: 6px;
+    padding: max(8px, env(safe-area-inset-top, 8px)) 0 5px;
+    gap: 5px;
+  }
+  .mobile-header-top {
+    padding: 0 10px;
   }
   .brand-title {
     font-size: 0.92rem;
@@ -1665,17 +1640,22 @@ body.in-game .mobile-bottom-nav,
     width: 30px;
     height: 30px;
   }
+  .mobile-search-bar {
+    margin: 0 10px;
+  }
   .mobile-search-field {
-    height: 35px;
+    height: 34px;
     font-size: 0.74rem;
     padding: 0 30px;
   }
   .mobile-category-bar {
-    padding: 6px 10px 4px;
+    padding: 2px 10px 4px;
     gap: 5px;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 14px, black calc(100% - 14px), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 14px, black calc(100% - 14px), transparent 100%);
   }
   .category-pill {
-    padding: 5px 10px;
+    padding: 4px 10px;
     font-size: 0.7rem;
   }
   .mobile-hero-section {
@@ -1735,7 +1715,16 @@ body.in-game .mobile-bottom-nav,
 /* Small / Compact Phones (360px – 374px, e.g. Galaxy S8 / A10 / S9) */
 @media (min-width: 360px) and (max-width: 374px) {
   .mobile-header {
-    padding: max(9px, env(safe-area-inset-top, 9px)) 12px 8px;
+    padding: max(9px, env(safe-area-inset-top, 9px)) 0 6px;
+  }
+  .mobile-header-top {
+    padding: 0 12px;
+  }
+  .mobile-search-bar {
+    margin: 0 12px;
+  }
+  .mobile-category-bar {
+    padding: 2px 12px 4px;
   }
   .mobile-hero-section {
     padding: 6px 12px 12px;
@@ -1761,7 +1750,16 @@ body.in-game .mobile-bottom-nav,
 /* Standard Mobile Devices (375px – 411px, e.g. iPhone X / 11 / 12 / 13 / 14 / 15) */
 @media (min-width: 375px) and (max-width: 411px) {
   .mobile-header {
-    padding: max(10px, env(safe-area-inset-top, 10px)) 14px 10px;
+    padding: max(10px, env(safe-area-inset-top, 10px)) 0 6px;
+  }
+  .mobile-header-top {
+    padding: 0 14px;
+  }
+  .mobile-search-bar {
+    margin: 0 14px;
+  }
+  .mobile-category-bar {
+    padding: 2px 14px 4px;
   }
   .mobile-hero-section {
     padding: 8px 14px 14px;
@@ -1781,7 +1779,16 @@ body.in-game .mobile-bottom-nav,
 /* Large Flagship Phones (412px – 430px+, e.g. Pixel 8, Galaxy S23 Ultra, iPhone 15 Pro Max) */
 @media (min-width: 412px) {
   .mobile-header {
-    padding: max(12px, env(safe-area-inset-top, 12px)) 16px 10px;
+    padding: max(12px, env(safe-area-inset-top, 12px)) 0 8px;
+  }
+  .mobile-header-top {
+    padding: 0 16px;
+  }
+  .mobile-search-bar {
+    margin: 0 16px;
+  }
+  .mobile-category-bar {
+    padding: 2px 16px 4px;
   }
   .mobile-hero-section {
     padding: 10px 16px 16px;
